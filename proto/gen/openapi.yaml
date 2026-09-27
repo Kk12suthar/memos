@@ -2517,6 +2517,171 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+    /api/v1/users/{user}/templates:
+        get:
+            tags:
+                - UserService
+            description: ListMemoTemplates returns the reusable memo templates owned by a user.
+            operationId: UserService_ListMemoTemplates
+            parameters:
+                - name: user
+                  in: path
+                  description: The user id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListMemoTemplatesResponse'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        post:
+            tags:
+                - UserService
+            description: CreateMemoTemplate creates a reusable memo template for a user.
+            operationId: UserService_CreateMemoTemplate
+            parameters:
+                - name: user
+                  in: path
+                  description: The user id.
+                  required: true
+                  schema:
+                    type: string
+                - name: validateOnly
+                  in: query
+                  description: Optional. If set, validate the request without creating the template.
+                  schema:
+                    type: boolean
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MemoTemplate'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MemoTemplate'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+    /api/v1/users/{user}/templates/{template}:
+        get:
+            tags:
+                - UserService
+            description: GetMemoTemplate gets a reusable memo template by name.
+            operationId: UserService_GetMemoTemplate
+            parameters:
+                - name: user
+                  in: path
+                  description: The user id.
+                  required: true
+                  schema:
+                    type: string
+                - name: template
+                  in: path
+                  description: The template id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MemoTemplate'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        delete:
+            tags:
+                - UserService
+            description: DeleteMemoTemplate deletes a reusable memo template for a user.
+            operationId: UserService_DeleteMemoTemplate
+            parameters:
+                - name: user
+                  in: path
+                  description: The user id.
+                  required: true
+                  schema:
+                    type: string
+                - name: template
+                  in: path
+                  description: The template id.
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+        patch:
+            tags:
+                - UserService
+            description: UpdateMemoTemplate updates a reusable memo template for a user.
+            operationId: UserService_UpdateMemoTemplate
+            parameters:
+                - name: user
+                  in: path
+                  description: The user id.
+                  required: true
+                  schema:
+                    type: string
+                - name: template
+                  in: path
+                  description: The template id.
+                  required: true
+                  schema:
+                    type: string
+                - name: updateMask
+                  in: query
+                  description: Optional. The fields to update. If omitted, all mutable fields are updated.
+                  schema:
+                    type: string
+                    format: field-mask
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/MemoTemplate'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/MemoTemplate'
+                default:
+                    description: Default error response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
     /api/v1/users/{user}/views:
         get:
             tags:
@@ -3949,6 +4114,13 @@ components:
                     items:
                         $ref: '#/components/schemas/MemoShare'
                     description: The list of share links.
+        ListMemoTemplatesResponse:
+            type: object
+            properties:
+                memoTemplates:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/MemoTemplate'
         ListMemoViewsResponse:
             type: object
             properties:
@@ -4345,6 +4517,24 @@ components:
                          If unset, the link never expires.
                     format: date-time
             description: MemoShare is an access grant that permits read-only access to a memo via an opaque bearer token.
+        MemoTemplate:
+            required:
+                - title
+                - content
+            type: object
+            properties:
+                name:
+                    type: string
+                    description: |-
+                        The resource name of the memo template.
+                         Format: users/{user}/templates/{template}
+                title:
+                    type: string
+                    description: The user-visible template title.
+                content:
+                    type: string
+                    description: Markdown inserted into a memo when this template is selected.
+            description: A reusable Markdown starting point for a memo.
         MemoView:
             required:
                 - title

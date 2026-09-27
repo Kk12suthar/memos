@@ -4,6 +4,7 @@ import {
   BarChart3Icon,
   CogIcon,
   DatabaseIcon,
+  FileTextIcon,
   HeartHandshakeIcon,
   KeyIcon,
   KeyRoundIcon,
@@ -31,6 +32,7 @@ import SpacesSection from "@/components/Settings/SpacesSection";
 import SSOSection from "@/components/Settings/SSOSection";
 import StorageSection from "@/components/Settings/StorageSection";
 import TagsSection from "@/components/Settings/TagsSection";
+import TemplatesSection from "@/components/Settings/TemplatesSection";
 import WebhookSection from "@/components/Settings/WebhookSection";
 import { InstanceSetting_Key } from "@/types/proto/api/v1/instance_service_pb";
 
@@ -48,6 +50,7 @@ export type SettingSectionKey =
   | "notification"
   | "sso"
   | "tags"
+  | "templates"
   | "ai"
   | "resource-stats";
 
@@ -125,6 +128,13 @@ export const SETTINGS_SECTIONS: SettingSectionDefinition[] = [
     labelKey: "setting.tags.label",
     icon: TagsIcon,
     component: TagsSection,
+  },
+  {
+    key: "templates",
+    scope: "basic",
+    labelKey: "setting.templates.label",
+    icon: FileTextIcon,
+    component: TemplatesSection,
   },
   {
     key: "memo-export",

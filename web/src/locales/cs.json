@@ -156,6 +156,8 @@
       "image-upload-failed": "Některé obrázky se nepodařilo nahrát. Zkuste to znovu nebo nahrané soubory ponechte jako přílohy.",
       "image-upload-stopped": "Nahrávání obrázku zastaveno {{completed}}/{{total}}",
       "insert-image": "Vložit obrázek",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Ponechat jako přílohy",
       "uploading-inline-image": "Nahrávání do obsahu",
       "uploading-images": "Nahrávání obrázků {{completed}}/{{total}}"
@@ -484,6 +486,25 @@
       "delete-confirm": "Jste si jisti, že chcete odstranit zobrazení `{{title}}`?",
       "delete-success": "Zobrazení `{{title}}` bylo úspěšně odstraněno",
       "change-icon": "Změnit ikonu zobrazení"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "authorization-endpoint": "Autorizační koncový bod",

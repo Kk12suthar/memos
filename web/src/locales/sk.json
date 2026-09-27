@@ -194,6 +194,8 @@
       "image-upload-failed": "Niektoré obrázky sa nepodarilo nahrať. Skúste to znova alebo ponechajte nahrané súbory ako prílohy.",
       "image-upload-stopped": "Nahrávanie obrázka zastavené {{completed}}/{{total}}",
       "insert-image": "Vložiť obrázok",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Ponechať ako prílohy",
       "uploading-inline-image": "Nahrávanie do obsahu",
       "uploading-images": "Nahrávanie obrázkov {{completed}}/{{total}}"
@@ -600,6 +602,25 @@
       "delete-confirm": "Naozaj chcete odstrániť zobrazenie `{{title}}`?",
       "delete-success": "Zobrazenie `{{title}}` bolo úspešne odstránené",
       "change-icon": "Zmeniť ikonu zobrazenia"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "account": "účtu",

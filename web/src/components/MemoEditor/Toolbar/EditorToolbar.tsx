@@ -40,6 +40,7 @@ export const EditorToolbar: FC<EditorToolbarProps> = ({
   onAudioRecorderClick,
   viewToggles,
   onInsertImages,
+  editorRef,
 }) => {
   const t = useTranslate();
   const { actions, dispatch } = useEditorContext();
@@ -105,6 +106,7 @@ export const EditorToolbar: FC<EditorToolbarProps> = ({
           onAudioRecorderClick={onAudioRecorderClick}
           viewToggles={viewToggles}
           onInsertImages={onInsertImages}
+          editorRef={editorRef}
         />
         <MemoSettings
           value={visibility}

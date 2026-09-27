@@ -194,6 +194,8 @@
       "image-upload-failed": "Nogle billeder kunne ikke uploades. Prøv igen, eller behold de uploadede filer som vedhæftede filer.",
       "image-upload-stopped": "Billedupload stoppet {{completed}}/{{total}}",
       "insert-image": "Indsæt billede",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Behold som vedhæftede filer",
       "uploading-inline-image": "Uploader til indhold",
       "uploading-images": "Uploader billeder {{completed}}/{{total}}"
@@ -600,6 +602,25 @@
       "delete-confirm": "Er du sikker på, at du vil slette visningen `{{title}}`?",
       "delete-success": "Visningen `{{title}}` blev slettet",
       "change-icon": "Skift visningsikon"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "account": "Konto",

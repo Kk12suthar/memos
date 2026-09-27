@@ -156,6 +156,8 @@
       "image-upload-failed": "ზოგიერთი სურათის ატვირთვა ვერ მოხერხდა. სცადეთ ხელახლა ან შეინახეთ ატვირთული ფაილები დანართებად.",
       "image-upload-stopped": "სურათის ატვირთვა შეჩერდა {{completed}}/{{total}}",
       "insert-image": "სურათის ჩასმა",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "დანართებად შენახვა",
       "uploading-inline-image": "კონტენტში ატვირთვა",
       "uploading-images": "სურათების ატვირთვა {{completed}}/{{total}}"
@@ -484,6 +486,25 @@
       "delete-confirm": "დარწმუნებული ხართ, რომ გინდათ ხედის `{{title}}` წაშლა?",
       "delete-success": "ხედი `{{title}}` წარმატებით წაიშალა",
       "change-icon": "ხედის ხატულის შეცვლა"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "authorization-endpoint": "ავტორიზაციის წერტილი",

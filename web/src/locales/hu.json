@@ -156,6 +156,8 @@
       "image-upload-failed": "Néhány kép feltöltése sikertelen. Próbálja újra, vagy tartsa meg a feltöltött fájlokat mellékletként.",
       "image-upload-stopped": "Képfeltöltés leállítva {{completed}}/{{total}}",
       "insert-image": "Kép beszúrása",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Megtartás mellékletként",
       "uploading-inline-image": "Feltöltés a tartalomhoz",
       "uploading-images": "Képek feltöltése {{completed}}/{{total}}"
@@ -484,6 +486,25 @@
       "delete-confirm": "Biztosan törlöd a `{{title}}` nézetet?",
       "delete-success": "`{{title}}` nézet sikeresen törölve",
       "change-icon": "Nézet ikonjának módosítása"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "authorization-endpoint": "Hitelesítési végpont",

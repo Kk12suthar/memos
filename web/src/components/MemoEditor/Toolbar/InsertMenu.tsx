@@ -1,6 +1,7 @@
 import { uniqBy } from "lodash-es";
 import {
   CheckIcon,
+  FileTextIcon,
   ImageIcon,
   LinkIcon,
   LoaderIcon,
@@ -21,9 +22,14 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useDebouncedEffect } from "@/hooks";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import { useMemoTemplates } from "@/hooks/useMemoTemplateQueries";
 import type { MemoRelation } from "@/types/proto/api/v1/memo_service_pb";
 import { useTranslate } from "@/utils/i18n";
 import { useFileUpload, useLinkMemo, useLocation } from "../hooks";
@@ -34,6 +40,8 @@ import type { LocalFile } from "../types/attachment";
 const InsertMenu = (props: InsertMenuProps) => {
   const t = useTranslate();
   const { actions, dispatch, getState } = useEditorContext();
+  const currentUser = useCurrentUser();
+  const { data: templates = [] } = useMemoTemplates(currentUser?.name);
   const relations = useEditorSelector((s) => s.metadata.relations);
   const { location: initialLocation, onLocationChange, viewToggles, isUploading: isUploadingProp } = props;
 
@@ -126,6 +134,15 @@ const InsertMenu = (props: InsertMenuProps) => {
     handleUploadClick();
   }, [getState, handleUploadClick]);
 
+  const handleTemplateClick = useCallback(
+    (content: string) => {
+      if (insertionDisabled) return;
+      props.editorRef?.current?.insertMarkdown(content);
+      props.editorRef?.current?.scrollToCursor();
+    },
+    [insertionDisabled, props.editorRef],
+  );
+
   const handleInlineImageUploadClick = useCallback(() => {
     if (getState().ui.isLoading.saving) return;
     inlineImageInputRef.current?.click();
@@ -168,6 +185,29 @@ const InsertMenu = (props: InsertMenuProps) => {
               {item.label}
             </DropdownMenuItem>
           ))}
+          {currentUser && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                  <FileTextIcon />
+                  {t("editor.insert-menu.templates")}
+                </DropdownMenuSubTrigger>
+                <DropdownMenuSubContent>
+                  {templates.length > 0 ? (
+                    templates.map((template) => (
+                      <DropdownMenuItem key={template.name} onClick={() => handleTemplateClick(template.content)} disabled={props.isSaving}>
+                        <FileTextIcon />
+                        <span className="max-w-52 truncate">{template.title}</span>
+                      </DropdownMenuItem>
+                    ))
+                  ) : (
+                    <DropdownMenuItem disabled>{t("editor.insert-menu.no-templates")}</DropdownMenuItem>
+                  )}
+                </DropdownMenuSubContent>
+              </DropdownMenuSub>
+            </>
+          )}
           {/* View toggles: focus mode + formatting-toolbar visibility. Absent
               when a host owns the editor's presentation — neither applies there. */}
           {viewToggles && (

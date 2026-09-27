@@ -159,6 +159,8 @@
       "image-upload-failed": "一部の画像はアップロードできませんでした。再試行するか、アップロード済みのファイルを添付ファイルとして保存してください。",
       "image-upload-stopped": "画像アップロードが停止しました {{completed}}/{{total}}",
       "insert-image": "画像を挿入",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "添付ファイルとして保存",
       "uploading-inline-image": "コンテンツにアップロード中",
       "uploading-images": "画像 {{completed}}/{{total}} をアップロード中"
@@ -484,6 +486,25 @@
       "delete-confirm": "ビュー `{{title}}` を削除してもよろしいですか？",
       "delete-success": "ビュー `{{title}}` を削除しました",
       "change-icon": "ビューのアイコンを変更"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "authorization-endpoint": "認証エンドポイント",

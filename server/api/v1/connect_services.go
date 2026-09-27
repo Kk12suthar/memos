@@ -363,6 +363,51 @@ func (s *ConnectServiceHandler) DeleteMemoView(ctx context.Context, req *connect
 	return connect.NewResponse(resp), nil
 }
 
+// ListMemoTemplates lists the reusable memo templates owned by a user.
+func (s *ConnectServiceHandler) ListMemoTemplates(ctx context.Context, req *connect.Request[v1pb.ListMemoTemplatesRequest]) (*connect.Response[v1pb.ListMemoTemplatesResponse], error) {
+	resp, err := s.APIV1Service.ListMemoTemplates(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+// GetMemoTemplate returns a reusable memo template by resource name.
+func (s *ConnectServiceHandler) GetMemoTemplate(ctx context.Context, req *connect.Request[v1pb.GetMemoTemplateRequest]) (*connect.Response[v1pb.MemoTemplate], error) {
+	resp, err := s.APIV1Service.GetMemoTemplate(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+// CreateMemoTemplate creates a reusable memo template for a user.
+func (s *ConnectServiceHandler) CreateMemoTemplate(ctx context.Context, req *connect.Request[v1pb.CreateMemoTemplateRequest]) (*connect.Response[v1pb.MemoTemplate], error) {
+	resp, err := s.APIV1Service.CreateMemoTemplate(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+// UpdateMemoTemplate updates a reusable memo template for a user.
+func (s *ConnectServiceHandler) UpdateMemoTemplate(ctx context.Context, req *connect.Request[v1pb.UpdateMemoTemplateRequest]) (*connect.Response[v1pb.MemoTemplate], error) {
+	resp, err := s.APIV1Service.UpdateMemoTemplate(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
+// DeleteMemoTemplate deletes a reusable memo template for a user.
+func (s *ConnectServiceHandler) DeleteMemoTemplate(ctx context.Context, req *connect.Request[v1pb.DeleteMemoTemplateRequest]) (*connect.Response[emptypb.Empty], error) {
+	resp, err := s.APIV1Service.DeleteMemoTemplate(ctx, req.Msg)
+	if err != nil {
+		return nil, convertGRPCError(err)
+	}
+	return connect.NewResponse(resp), nil
+}
+
 // MemoService
 
 func (s *ConnectServiceHandler) CreateMemo(ctx context.Context, req *connect.Request[v1pb.CreateMemoRequest]) (*connect.Response[v1pb.Memo], error) {

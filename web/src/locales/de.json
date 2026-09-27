@@ -156,6 +156,8 @@
       "image-upload-failed": "Einige Bilder konnten nicht hochgeladen werden. Bitte versuchen Sie es erneut oder behalten Sie die hochgeladenen Dateien als Anhänge bei.",
       "image-upload-stopped": "Bild-Upload gestoppt {{completed}}/{{total}}",
       "insert-image": "Bild einfügen",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Als Anhänge beibehalten",
       "uploading-inline-image": "Inhalt wird hochgeladen",
       "uploading-images": "Bilder werden hochgeladen {{completed}}/{{total}}"
@@ -484,6 +486,25 @@
       "delete-confirm": "Bist du sicher, dass du die Ansicht `{{title}}` löschen möchtest?",
       "delete-success": "Ansicht `{{title}}` erfolgreich gelöscht",
       "change-icon": "Ansichtssymbol ändern"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "authorization-endpoint": "Autorisierungsendpunkt",

@@ -156,6 +156,8 @@
       "image-upload-failed": "Nekaterih slik ni bilo mogoče naložiti. Poskusite znova ali pa naložene datoteke shranite kot priloge.",
       "image-upload-stopped": "Nalaganje slike ustavljeno {{completed}}/{{total}}",
       "insert-image": "Vstavi sliko",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Obdrži kot priloge",
       "uploading-inline-image": "Nalaganje v vsebino",
       "uploading-images": "Nalaganje slik {{completed}}/{{total}}"
@@ -484,6 +486,25 @@
       "delete-confirm": "Ali ste prepričani, da želite izbrisati pogled \"{{title}}\"?",
       "delete-success": "Pogled \"{{title}}\" je uspešno izbrisan",
       "change-icon": "Spremeni ikono pogleda"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "authorization-endpoint": "Končna točka avtorizacije",

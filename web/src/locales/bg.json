@@ -194,6 +194,8 @@
       "image-upload-failed": "Някои изображения не можаха да бъдат качени. Опитайте отново или запазете качените файлове като прикачени файлове.",
       "image-upload-stopped": "Качването на изображение спря {{completed}}/{{total}}",
       "insert-image": "Вмъкване на изображение",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Запазване като прикачени файлове",
       "uploading-inline-image": "Качване в съдържание",
       "uploading-images": "Качване на изображения {{completed}}/{{total}}"
@@ -600,6 +602,25 @@
       "delete-confirm": "Сигурни ли сте, че искате да изтриете изгледа `{{title}}`?",
       "delete-success": "Изгледът `{{title}}` е изтрит успешно",
       "change-icon": "Промяна на иконата на изгледа"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "account": "акаунт",

@@ -154,6 +154,42 @@ service UserService {
     option (google.api.method_signature) = "name";
   }
 
+  // ListMemoTemplates returns the reusable memo templates owned by a user.
+  rpc ListMemoTemplates(ListMemoTemplatesRequest) returns (ListMemoTemplatesResponse) {
+    option (google.api.http) = {get: "/api/v1/{parent=users/*}/templates"};
+    option (google.api.method_signature) = "parent";
+  }
+
+  // GetMemoTemplate gets a reusable memo template by name.
+  rpc GetMemoTemplate(GetMemoTemplateRequest) returns (MemoTemplate) {
+    option (google.api.http) = {get: "/api/v1/{name=users/*/templates/*}"};
+    option (google.api.method_signature) = "name";
+  }
+
+  // CreateMemoTemplate creates a reusable memo template for a user.
+  rpc CreateMemoTemplate(CreateMemoTemplateRequest) returns (MemoTemplate) {
+    option (google.api.http) = {
+      post: "/api/v1/{parent=users/*}/templates"
+      body: "memo_template"
+    };
+    option (google.api.method_signature) = "parent,memo_template";
+  }
+
+  // UpdateMemoTemplate updates a reusable memo template for a user.
+  rpc UpdateMemoTemplate(UpdateMemoTemplateRequest) returns (MemoTemplate) {
+    option (google.api.http) = {
+      patch: "/api/v1/{memo_template.name=users/*/templates/*}"
+      body: "memo_template"
+    };
+    option (google.api.method_signature) = "memo_template,update_mask";
+  }
+
+  // DeleteMemoTemplate deletes a reusable memo template for a user.
+  rpc DeleteMemoTemplate(DeleteMemoTemplateRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {delete: "/api/v1/{name=users/*/templates/*}"};
+    option (google.api.method_signature) = "name";
+  }
+
   // ListLinkedIdentities returns a list of linked SSO identities for a user.
   rpc ListLinkedIdentities(ListLinkedIdentitiesRequest) returns (ListLinkedIdentitiesResponse) {
     option (google.api.http) = {get: "/api/v1/{parent=users/*}/linkedIdentities"};
@@ -841,6 +877,80 @@ message DeleteMemoViewRequest {
   string name = 1 [
     (google.api.field_behavior) = REQUIRED,
     (google.api.resource_reference) = {type: "memos.api.v1/MemoView"}
+  ];
+}
+
+// A reusable Markdown starting point for a memo.
+message MemoTemplate {
+  option (google.api.resource) = {
+    type: "memos.api.v1/MemoTemplate"
+    pattern: "users/{user}/templates/{template}"
+    singular: "template"
+    plural: "templates"
+  };
+
+  // The resource name of the memo template.
+  // Format: users/{user}/templates/{template}
+  string name = 1 [(google.api.field_behavior) = IDENTIFIER];
+
+  // The user-visible template title.
+  string title = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Markdown inserted into a memo when this template is selected.
+  string content = 3 [(google.api.field_behavior) = REQUIRED];
+}
+
+message ListMemoTemplatesRequest {
+  // Required. The parent resource where templates are listed.
+  // Format: users/{user}
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {child_type: "memos.api.v1/MemoTemplate"}
+  ];
+}
+
+message ListMemoTemplatesResponse {
+  repeated MemoTemplate memo_templates = 1;
+}
+
+message GetMemoTemplateRequest {
+  // Required. The resource name of the memo template.
+  // Format: users/{user}/templates/{template}
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "memos.api.v1/MemoTemplate"}
+  ];
+}
+
+message CreateMemoTemplateRequest {
+  // Required. The parent resource where this template will be created.
+  // Format: users/{user}
+  string parent = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {child_type: "memos.api.v1/MemoTemplate"}
+  ];
+
+  // Required. The memo template to create.
+  MemoTemplate memo_template = 2 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. If set, validate the request without creating the template.
+  bool validate_only = 3 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message UpdateMemoTemplateRequest {
+  // Required. The memo template resource to update.
+  MemoTemplate memo_template = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // Optional. The fields to update. If omitted, all mutable fields are updated.
+  google.protobuf.FieldMask update_mask = 2 [(google.api.field_behavior) = OPTIONAL];
+}
+
+message DeleteMemoTemplateRequest {
+  // Required. The resource name of the memo template to delete.
+  // Format: users/{user}/templates/{template}
+  string name = 1 [
+    (google.api.field_behavior) = REQUIRED,
+    (google.api.resource_reference) = {type: "memos.api.v1/MemoTemplate"}
   ];
 }
 

@@ -1,9 +1,11 @@
+import type { RefObject } from "react";
 import type { MemoSuggestion } from "@/lib/memo-suggestions";
 import type { Attachment } from "@/types/proto/api/v1/attachment_service_pb";
 import type { Location, Memo, Visibility } from "@/types/proto/api/v1/memo_service_pb";
 import type { EditorFileOrigin } from "../Editor/extensions";
 import type { AudioRecorderStatus } from "../hooks/useAudioRecorder";
 import type { LocalFile } from "./attachment";
+import type { EditorController } from "./editorController";
 
 export interface MemoEditorProps {
   className?: string;
@@ -79,6 +81,7 @@ export interface EditorToolbarProps {
   onAudioRecorderClick: () => void;
   viewToggles?: EditorViewToggles;
   onInsertImages: (files: File[]) => void;
+  editorRef?: RefObject<EditorController | null>;
 }
 
 export interface EditorMetadataProps {
@@ -122,6 +125,7 @@ export interface InsertMenuProps {
   onAudioRecorderClick?: () => void;
   viewToggles?: EditorViewToggles;
   onInsertImages: (files: File[]) => void;
+  editorRef?: RefObject<EditorController | null>;
 }
 
 export interface MemoSettingsProps {

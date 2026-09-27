@@ -81,6 +81,21 @@ const (
 	// UserServiceDeleteMemoViewProcedure is the fully-qualified name of the UserService's
 	// DeleteMemoView RPC.
 	UserServiceDeleteMemoViewProcedure = "/memos.api.v1.UserService/DeleteMemoView"
+	// UserServiceListMemoTemplatesProcedure is the fully-qualified name of the UserService's
+	// ListMemoTemplates RPC.
+	UserServiceListMemoTemplatesProcedure = "/memos.api.v1.UserService/ListMemoTemplates"
+	// UserServiceGetMemoTemplateProcedure is the fully-qualified name of the UserService's
+	// GetMemoTemplate RPC.
+	UserServiceGetMemoTemplateProcedure = "/memos.api.v1.UserService/GetMemoTemplate"
+	// UserServiceCreateMemoTemplateProcedure is the fully-qualified name of the UserService's
+	// CreateMemoTemplate RPC.
+	UserServiceCreateMemoTemplateProcedure = "/memos.api.v1.UserService/CreateMemoTemplate"
+	// UserServiceUpdateMemoTemplateProcedure is the fully-qualified name of the UserService's
+	// UpdateMemoTemplate RPC.
+	UserServiceUpdateMemoTemplateProcedure = "/memos.api.v1.UserService/UpdateMemoTemplate"
+	// UserServiceDeleteMemoTemplateProcedure is the fully-qualified name of the UserService's
+	// DeleteMemoTemplate RPC.
+	UserServiceDeleteMemoTemplateProcedure = "/memos.api.v1.UserService/DeleteMemoTemplate"
 	// UserServiceListLinkedIdentitiesProcedure is the fully-qualified name of the UserService's
 	// ListLinkedIdentities RPC.
 	UserServiceListLinkedIdentitiesProcedure = "/memos.api.v1.UserService/ListLinkedIdentities"
@@ -178,6 +193,16 @@ type UserServiceClient interface {
 	UpdateMemoView(context.Context, *connect.Request[v1.UpdateMemoViewRequest]) (*connect.Response[v1.MemoView], error)
 	// DeleteMemoView deletes a memo view for a user.
 	DeleteMemoView(context.Context, *connect.Request[v1.DeleteMemoViewRequest]) (*connect.Response[emptypb.Empty], error)
+	// ListMemoTemplates returns the reusable memo templates owned by a user.
+	ListMemoTemplates(context.Context, *connect.Request[v1.ListMemoTemplatesRequest]) (*connect.Response[v1.ListMemoTemplatesResponse], error)
+	// GetMemoTemplate gets a reusable memo template by name.
+	GetMemoTemplate(context.Context, *connect.Request[v1.GetMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error)
+	// CreateMemoTemplate creates a reusable memo template for a user.
+	CreateMemoTemplate(context.Context, *connect.Request[v1.CreateMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error)
+	// UpdateMemoTemplate updates a reusable memo template for a user.
+	UpdateMemoTemplate(context.Context, *connect.Request[v1.UpdateMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error)
+	// DeleteMemoTemplate deletes a reusable memo template for a user.
+	DeleteMemoTemplate(context.Context, *connect.Request[v1.DeleteMemoTemplateRequest]) (*connect.Response[emptypb.Empty], error)
 	// ListLinkedIdentities returns a list of linked SSO identities for a user.
 	ListLinkedIdentities(context.Context, *connect.Request[v1.ListLinkedIdentitiesRequest]) (*connect.Response[v1.ListLinkedIdentitiesResponse], error)
 	// CreateLinkedIdentity links an SSO identity to the authenticated user.
@@ -333,6 +358,36 @@ func NewUserServiceClient(httpClient connect.HTTPClient, baseURL string, opts ..
 			connect.WithSchema(userServiceMethods.ByName("DeleteMemoView")),
 			connect.WithClientOptions(opts...),
 		),
+		listMemoTemplates: connect.NewClient[v1.ListMemoTemplatesRequest, v1.ListMemoTemplatesResponse](
+			httpClient,
+			baseURL+UserServiceListMemoTemplatesProcedure,
+			connect.WithSchema(userServiceMethods.ByName("ListMemoTemplates")),
+			connect.WithClientOptions(opts...),
+		),
+		getMemoTemplate: connect.NewClient[v1.GetMemoTemplateRequest, v1.MemoTemplate](
+			httpClient,
+			baseURL+UserServiceGetMemoTemplateProcedure,
+			connect.WithSchema(userServiceMethods.ByName("GetMemoTemplate")),
+			connect.WithClientOptions(opts...),
+		),
+		createMemoTemplate: connect.NewClient[v1.CreateMemoTemplateRequest, v1.MemoTemplate](
+			httpClient,
+			baseURL+UserServiceCreateMemoTemplateProcedure,
+			connect.WithSchema(userServiceMethods.ByName("CreateMemoTemplate")),
+			connect.WithClientOptions(opts...),
+		),
+		updateMemoTemplate: connect.NewClient[v1.UpdateMemoTemplateRequest, v1.MemoTemplate](
+			httpClient,
+			baseURL+UserServiceUpdateMemoTemplateProcedure,
+			connect.WithSchema(userServiceMethods.ByName("UpdateMemoTemplate")),
+			connect.WithClientOptions(opts...),
+		),
+		deleteMemoTemplate: connect.NewClient[v1.DeleteMemoTemplateRequest, emptypb.Empty](
+			httpClient,
+			baseURL+UserServiceDeleteMemoTemplateProcedure,
+			connect.WithSchema(userServiceMethods.ByName("DeleteMemoTemplate")),
+			connect.WithClientOptions(opts...),
+		),
 		listLinkedIdentities: connect.NewClient[v1.ListLinkedIdentitiesRequest, v1.ListLinkedIdentitiesResponse](
 			httpClient,
 			baseURL+UserServiceListLinkedIdentitiesProcedure,
@@ -446,6 +501,11 @@ type userServiceClient struct {
 	createMemoView              *connect.Client[v1.CreateMemoViewRequest, v1.MemoView]
 	updateMemoView              *connect.Client[v1.UpdateMemoViewRequest, v1.MemoView]
 	deleteMemoView              *connect.Client[v1.DeleteMemoViewRequest, emptypb.Empty]
+	listMemoTemplates           *connect.Client[v1.ListMemoTemplatesRequest, v1.ListMemoTemplatesResponse]
+	getMemoTemplate             *connect.Client[v1.GetMemoTemplateRequest, v1.MemoTemplate]
+	createMemoTemplate          *connect.Client[v1.CreateMemoTemplateRequest, v1.MemoTemplate]
+	updateMemoTemplate          *connect.Client[v1.UpdateMemoTemplateRequest, v1.MemoTemplate]
+	deleteMemoTemplate          *connect.Client[v1.DeleteMemoTemplateRequest, emptypb.Empty]
 	listLinkedIdentities        *connect.Client[v1.ListLinkedIdentitiesRequest, v1.ListLinkedIdentitiesResponse]
 	createLinkedIdentity        *connect.Client[v1.CreateLinkedIdentityRequest, v1.LinkedIdentity]
 	getLinkedIdentity           *connect.Client[v1.GetLinkedIdentityRequest, v1.LinkedIdentity]
@@ -551,6 +611,31 @@ func (c *userServiceClient) UpdateMemoView(ctx context.Context, req *connect.Req
 // DeleteMemoView calls memos.api.v1.UserService.DeleteMemoView.
 func (c *userServiceClient) DeleteMemoView(ctx context.Context, req *connect.Request[v1.DeleteMemoViewRequest]) (*connect.Response[emptypb.Empty], error) {
 	return c.deleteMemoView.CallUnary(ctx, req)
+}
+
+// ListMemoTemplates calls memos.api.v1.UserService.ListMemoTemplates.
+func (c *userServiceClient) ListMemoTemplates(ctx context.Context, req *connect.Request[v1.ListMemoTemplatesRequest]) (*connect.Response[v1.ListMemoTemplatesResponse], error) {
+	return c.listMemoTemplates.CallUnary(ctx, req)
+}
+
+// GetMemoTemplate calls memos.api.v1.UserService.GetMemoTemplate.
+func (c *userServiceClient) GetMemoTemplate(ctx context.Context, req *connect.Request[v1.GetMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error) {
+	return c.getMemoTemplate.CallUnary(ctx, req)
+}
+
+// CreateMemoTemplate calls memos.api.v1.UserService.CreateMemoTemplate.
+func (c *userServiceClient) CreateMemoTemplate(ctx context.Context, req *connect.Request[v1.CreateMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error) {
+	return c.createMemoTemplate.CallUnary(ctx, req)
+}
+
+// UpdateMemoTemplate calls memos.api.v1.UserService.UpdateMemoTemplate.
+func (c *userServiceClient) UpdateMemoTemplate(ctx context.Context, req *connect.Request[v1.UpdateMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error) {
+	return c.updateMemoTemplate.CallUnary(ctx, req)
+}
+
+// DeleteMemoTemplate calls memos.api.v1.UserService.DeleteMemoTemplate.
+func (c *userServiceClient) DeleteMemoTemplate(ctx context.Context, req *connect.Request[v1.DeleteMemoTemplateRequest]) (*connect.Response[emptypb.Empty], error) {
+	return c.deleteMemoTemplate.CallUnary(ctx, req)
 }
 
 // ListLinkedIdentities calls memos.api.v1.UserService.ListLinkedIdentities.
@@ -678,6 +763,16 @@ type UserServiceHandler interface {
 	UpdateMemoView(context.Context, *connect.Request[v1.UpdateMemoViewRequest]) (*connect.Response[v1.MemoView], error)
 	// DeleteMemoView deletes a memo view for a user.
 	DeleteMemoView(context.Context, *connect.Request[v1.DeleteMemoViewRequest]) (*connect.Response[emptypb.Empty], error)
+	// ListMemoTemplates returns the reusable memo templates owned by a user.
+	ListMemoTemplates(context.Context, *connect.Request[v1.ListMemoTemplatesRequest]) (*connect.Response[v1.ListMemoTemplatesResponse], error)
+	// GetMemoTemplate gets a reusable memo template by name.
+	GetMemoTemplate(context.Context, *connect.Request[v1.GetMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error)
+	// CreateMemoTemplate creates a reusable memo template for a user.
+	CreateMemoTemplate(context.Context, *connect.Request[v1.CreateMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error)
+	// UpdateMemoTemplate updates a reusable memo template for a user.
+	UpdateMemoTemplate(context.Context, *connect.Request[v1.UpdateMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error)
+	// DeleteMemoTemplate deletes a reusable memo template for a user.
+	DeleteMemoTemplate(context.Context, *connect.Request[v1.DeleteMemoTemplateRequest]) (*connect.Response[emptypb.Empty], error)
 	// ListLinkedIdentities returns a list of linked SSO identities for a user.
 	ListLinkedIdentities(context.Context, *connect.Request[v1.ListLinkedIdentitiesRequest]) (*connect.Response[v1.ListLinkedIdentitiesResponse], error)
 	// CreateLinkedIdentity links an SSO identity to the authenticated user.
@@ -829,6 +924,36 @@ func NewUserServiceHandler(svc UserServiceHandler, opts ...connect.HandlerOption
 		connect.WithSchema(userServiceMethods.ByName("DeleteMemoView")),
 		connect.WithHandlerOptions(opts...),
 	)
+	userServiceListMemoTemplatesHandler := connect.NewUnaryHandler(
+		UserServiceListMemoTemplatesProcedure,
+		svc.ListMemoTemplates,
+		connect.WithSchema(userServiceMethods.ByName("ListMemoTemplates")),
+		connect.WithHandlerOptions(opts...),
+	)
+	userServiceGetMemoTemplateHandler := connect.NewUnaryHandler(
+		UserServiceGetMemoTemplateProcedure,
+		svc.GetMemoTemplate,
+		connect.WithSchema(userServiceMethods.ByName("GetMemoTemplate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	userServiceCreateMemoTemplateHandler := connect.NewUnaryHandler(
+		UserServiceCreateMemoTemplateProcedure,
+		svc.CreateMemoTemplate,
+		connect.WithSchema(userServiceMethods.ByName("CreateMemoTemplate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	userServiceUpdateMemoTemplateHandler := connect.NewUnaryHandler(
+		UserServiceUpdateMemoTemplateProcedure,
+		svc.UpdateMemoTemplate,
+		connect.WithSchema(userServiceMethods.ByName("UpdateMemoTemplate")),
+		connect.WithHandlerOptions(opts...),
+	)
+	userServiceDeleteMemoTemplateHandler := connect.NewUnaryHandler(
+		UserServiceDeleteMemoTemplateProcedure,
+		svc.DeleteMemoTemplate,
+		connect.WithSchema(userServiceMethods.ByName("DeleteMemoTemplate")),
+		connect.WithHandlerOptions(opts...),
+	)
 	userServiceListLinkedIdentitiesHandler := connect.NewUnaryHandler(
 		UserServiceListLinkedIdentitiesProcedure,
 		svc.ListLinkedIdentities,
@@ -957,6 +1082,16 @@ func NewUserServiceHandler(svc UserServiceHandler, opts ...connect.HandlerOption
 			userServiceUpdateMemoViewHandler.ServeHTTP(w, r)
 		case UserServiceDeleteMemoViewProcedure:
 			userServiceDeleteMemoViewHandler.ServeHTTP(w, r)
+		case UserServiceListMemoTemplatesProcedure:
+			userServiceListMemoTemplatesHandler.ServeHTTP(w, r)
+		case UserServiceGetMemoTemplateProcedure:
+			userServiceGetMemoTemplateHandler.ServeHTTP(w, r)
+		case UserServiceCreateMemoTemplateProcedure:
+			userServiceCreateMemoTemplateHandler.ServeHTTP(w, r)
+		case UserServiceUpdateMemoTemplateProcedure:
+			userServiceUpdateMemoTemplateHandler.ServeHTTP(w, r)
+		case UserServiceDeleteMemoTemplateProcedure:
+			userServiceDeleteMemoTemplateHandler.ServeHTTP(w, r)
 		case UserServiceListLinkedIdentitiesProcedure:
 			userServiceListLinkedIdentitiesHandler.ServeHTTP(w, r)
 		case UserServiceCreateLinkedIdentityProcedure:
@@ -1066,6 +1201,26 @@ func (UnimplementedUserServiceHandler) UpdateMemoView(context.Context, *connect.
 
 func (UnimplementedUserServiceHandler) DeleteMemoView(context.Context, *connect.Request[v1.DeleteMemoViewRequest]) (*connect.Response[emptypb.Empty], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.v1.UserService.DeleteMemoView is not implemented"))
+}
+
+func (UnimplementedUserServiceHandler) ListMemoTemplates(context.Context, *connect.Request[v1.ListMemoTemplatesRequest]) (*connect.Response[v1.ListMemoTemplatesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.v1.UserService.ListMemoTemplates is not implemented"))
+}
+
+func (UnimplementedUserServiceHandler) GetMemoTemplate(context.Context, *connect.Request[v1.GetMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.v1.UserService.GetMemoTemplate is not implemented"))
+}
+
+func (UnimplementedUserServiceHandler) CreateMemoTemplate(context.Context, *connect.Request[v1.CreateMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.v1.UserService.CreateMemoTemplate is not implemented"))
+}
+
+func (UnimplementedUserServiceHandler) UpdateMemoTemplate(context.Context, *connect.Request[v1.UpdateMemoTemplateRequest]) (*connect.Response[v1.MemoTemplate], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.v1.UserService.UpdateMemoTemplate is not implemented"))
+}
+
+func (UnimplementedUserServiceHandler) DeleteMemoTemplate(context.Context, *connect.Request[v1.DeleteMemoTemplateRequest]) (*connect.Response[emptypb.Empty], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("memos.api.v1.UserService.DeleteMemoTemplate is not implemented"))
 }
 
 func (UnimplementedUserServiceHandler) ListLinkedIdentities(context.Context, *connect.Request[v1.ListLinkedIdentitiesRequest]) (*connect.Response[v1.ListLinkedIdentitiesResponse], error) {

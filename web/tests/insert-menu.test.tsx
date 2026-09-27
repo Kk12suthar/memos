@@ -1,14 +1,22 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+import type { RefObject } from "react";
 import { beforeAll, describe, expect, test, vi } from "vitest";
 import { createInitialState, EditorProvider } from "@/components/MemoEditor/state";
 import { EditorToolbar } from "@/components/MemoEditor/Toolbar/EditorToolbar";
 import InsertMenu from "@/components/MemoEditor/Toolbar/InsertMenu";
+import type { EditorController } from "@/components/MemoEditor/types/editorController";
+
+type TestTemplate = { name: string; title: string; content: string };
+
+const currentUserMock = vi.hoisted(() => vi.fn<() => { name: string } | undefined>(() => undefined));
+const memoTemplatesMock = vi.hoisted(() => vi.fn<() => { data: TestTemplate[] }>(() => ({ data: [] })));
 
 vi.mock("@/utils/i18n", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@/utils/i18n")>()),
   useTranslate: () => (key: string) => key,
 }));
-vi.mock("@/hooks/useCurrentUser", () => ({ default: () => undefined }));
+vi.mock("@/hooks/useCurrentUser", () => ({ default: currentUserMock }));
+vi.mock("@/hooks/useMemoTemplateQueries", () => ({ useMemoTemplates: memoTemplatesMock }));
 vi.mock("@/contexts/AuthContext", () => ({ useAuth: () => ({ userGeneralSetting: undefined }) }));
 vi.mock("@/hooks/useSpaceQueries", () => ({ useSpaces: () => ({ data: [] }) }));
 vi.mock("@/contexts/SpaceContext", () => ({ useSpaceContext: () => ({ selectedSpaceName: undefined }) }));
@@ -69,6 +77,35 @@ describe("InsertMenu", () => {
     expect(labels).not.toContain("editor.focus-mode");
     expect(labels).not.toContain("editor.formatting-toolbar");
     expect(screen.queryByRole("separator")).not.toBeInTheDocument();
+  });
+
+  test("inserts a selected template at the editor cursor", async () => {
+    currentUserMock.mockReturnValue({ name: "users/test" });
+    memoTemplatesMock.mockReturnValue({
+      data: [{ name: "users/test/templates/daily", title: "Daily log", content: "# Daily log" }],
+    });
+    const insertMarkdown = vi.fn();
+    const scrollToCursor = vi.fn();
+    const editorRef = { current: { insertMarkdown, scrollToCursor } } as unknown as RefObject<EditorController | null>;
+
+    render(
+      <EditorProvider>
+        <InsertMenu
+          editorRef={editorRef}
+          onLocationChange={vi.fn()}
+          onInsertImages={vi.fn()}
+          onAudioRecorderClick={vi.fn()}
+          viewToggles={viewToggles}
+        />
+      </EditorProvider>,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "common.add" }));
+    fireEvent.click(screen.getByRole("menuitem", { name: "editor.insert-menu.templates" }));
+    fireEvent.click(await screen.findByRole("menuitem", { name: "Daily log" }));
+
+    expect(insertMarkdown).toHaveBeenCalledWith("# Daily log");
+    expect(scrollToCursor).toHaveBeenCalledOnce();
   });
 
   test("uses separate unrestricted and multi-image file inputs", () => {

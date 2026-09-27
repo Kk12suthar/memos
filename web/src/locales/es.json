@@ -156,6 +156,8 @@
       "image-upload-failed": "No se pudieron cargar algunas imágenes. Inténtalo de nuevo o guarda los archivos cargados como adjuntos.",
       "image-upload-stopped": "Se detuvo la carga de la imagen {{completed}}/{{total}}",
       "insert-image": "Insertar imagen",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Guardar como adjuntos",
       "uploading-inline-image": "Cargando contenido",
       "uploading-images": "Cargando imágenes {{completed}}/{{total}}"
@@ -484,6 +486,25 @@
       "delete-confirm": "¿Estás seguro de que quieres eliminar la vista `{{title}}`?",
       "delete-success": "Vista `{{title}}` eliminada correctamente",
       "change-icon": "Cambiar icono de vista"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "authorization-endpoint": "Punto final de autorización",

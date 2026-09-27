@@ -194,6 +194,8 @@
       "image-upload-failed": "Unele imagini nu au putut fi încărcate. Încercați din nou sau păstrați fișierele încărcate ca atașamente.",
       "image-upload-stopped": "Încărcarea imaginii a fost oprită {{completed}}/{{total}}",
       "insert-image": "Inserare imagine",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Păstrare ca atașamente",
       "uploading-inline-image": "Se încarcă în conținut",
       "uploading-images": "Se încarcă imagini {{completed}}/{{total}}"
@@ -600,6 +602,25 @@
       "delete-confirm": "Sigur doriți să ștergeți vizualizarea `{{title}}`?",
       "delete-success": "Vizualizarea `{{title}}` a fost ștearsă cu succes",
       "change-icon": "Schimbă pictograma vizualizării"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "account": "Cont",

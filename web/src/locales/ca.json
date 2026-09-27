@@ -156,6 +156,8 @@
       "image-upload-failed": "No s'han pogut carregar algunes imatges. Torneu-ho a intentar o conserveu els fitxers carregats com a fitxers adjunts.",
       "image-upload-stopped": "La ​​càrrega d'imatges s'ha aturat {{completed}}/{{total}}",
       "insert-image": "Insereix una imatge",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Desa com a fitxers adjunts",
       "uploading-inline-image": "S'està pujant al contingut",
       "uploading-images": "S'estan pujant imatges {{completed}}/{{total}}"
@@ -484,6 +486,25 @@
       "delete-confirm": "Estàs segur que vols eliminar la vista `{{title}}`?",
       "delete-success": "Vista `{{title}}` eliminada correctament",
       "change-icon": "Canvia la icona de vista"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "authorization-endpoint": "Punt final d'autorització",

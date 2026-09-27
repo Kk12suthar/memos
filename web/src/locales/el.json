@@ -194,6 +194,8 @@
       "image-upload-failed": "Δεν ήταν δυνατή η μεταφόρτωση ορισμένων εικόνων. Δοκιμάστε ξανά ή διατηρήστε τα μεταφορτωμένα αρχεία ως συνημμένα.",
       "image-upload-stopped": "Η μεταφόρτωση εικόνας διακόπηκε {{completed}}/{{total}}",
       "insert-image": "Εισαγωγή εικόνας",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Διατήρηση ως συνημμένα",
       "uploading-inline-image": "Μεταφόρτωση σε περιεχόμενο",
       "uploading-images": "Μεταφόρτωση εικόνων {{completed}}/{{total}}"
@@ -600,6 +602,25 @@
       "delete-confirm": "Είστε βέβαιοι ότι θέλετε να διαγράψετε την προβολή `{{title}}`;",
       "delete-success": "Η προβολή `{{title}}` διαγράφηκε με επιτυχία",
       "change-icon": "Αλλαγή εικονιδίου προβολής"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "account": "Λογαριασμός",

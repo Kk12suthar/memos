@@ -418,6 +418,7 @@ const MemoEditorImpl: React.FC<MemoEditorProps> = ({
             onAudioRecorderClick={handleAudioRecorderClick}
             viewToggles={viewToggles}
             onInsertImages={handleInsertImages}
+            editorRef={editorRef}
           />
         </div>
       </div>

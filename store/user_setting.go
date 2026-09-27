@@ -627,6 +627,140 @@ func (s *Store) upsertUserMemoViews(ctx context.Context, userID int32, memoViews
 	return errors.Wrap(err, "upsert memo views user setting")
 }
 
+// GetUserMemoTemplates returns the reusable memo templates of the user.
+func (s *Store) GetUserMemoTemplates(ctx context.Context, userID int32) ([]*storepb.MemoTemplatesUserSetting_MemoTemplate, error) {
+	userSetting, err := s.GetUserSetting(ctx, &FindUserSetting{
+		UserID: &userID,
+		Key:    storepb.UserSetting_MEMO_TEMPLATES,
+	})
+	if err != nil {
+		return nil, errors.Wrap(err, "get memo templates user setting")
+	}
+	if userSetting == nil {
+		return []*storepb.MemoTemplatesUserSetting_MemoTemplate{}, nil
+	}
+
+	memoTemplates := userSetting.GetMemoTemplates().GetMemoTemplates()
+	clonedMemoTemplates := make([]*storepb.MemoTemplatesUserSetting_MemoTemplate, len(memoTemplates))
+	for i, memoTemplate := range memoTemplates {
+		if memoTemplate != nil {
+			clonedMemoTemplate, ok := proto.Clone(memoTemplate).(*storepb.MemoTemplatesUserSetting_MemoTemplate)
+			if !ok {
+				return nil, errors.New("failed to clone memo template")
+			}
+			clonedMemoTemplates[i] = clonedMemoTemplate
+		}
+	}
+	return clonedMemoTemplates, nil
+}
+
+// AddUserMemoTemplate appends a reusable memo template for the user.
+func (s *Store) AddUserMemoTemplate(ctx context.Context, userID int32, memoTemplate *storepb.MemoTemplatesUserSetting_MemoTemplate) error {
+	s.memoTemplateMu.Lock()
+	defer s.memoTemplateMu.Unlock()
+
+	existing, err := s.GetUserMemoTemplates(ctx, userID)
+	if err != nil {
+		return errors.Wrap(err, "get existing memo templates")
+	}
+
+	memoTemplates := make([]*storepb.MemoTemplatesUserSetting_MemoTemplate, 0, len(existing)+1)
+	memoTemplates = append(memoTemplates, existing...)
+	memoTemplates = append(memoTemplates, memoTemplate)
+
+	if err := s.upsertUserMemoTemplates(ctx, userID, memoTemplates); err != nil {
+		return errors.Wrap(err, "add memo template")
+	}
+	return nil
+}
+
+// UpdateUserMemoTemplate applies the non-nil field updates to a memo template.
+// It returns nil when no matching memo template is found.
+func (s *Store) UpdateUserMemoTemplate(
+	ctx context.Context,
+	userID int32,
+	memoTemplateID string,
+	title *string,
+	content *string,
+) (*storepb.MemoTemplatesUserSetting_MemoTemplate, error) {
+	s.memoTemplateMu.Lock()
+	defer s.memoTemplateMu.Unlock()
+
+	existing, err := s.GetUserMemoTemplates(ctx, userID)
+	if err != nil {
+		return nil, errors.Wrap(err, "get existing memo templates")
+	}
+
+	var updatedMemoTemplate *storepb.MemoTemplatesUserSetting_MemoTemplate
+	memoTemplates := make([]*storepb.MemoTemplatesUserSetting_MemoTemplate, 0, len(existing))
+	for _, item := range existing {
+		if item.GetId() != memoTemplateID {
+			memoTemplates = append(memoTemplates, item)
+			continue
+		}
+
+		updatedMemoTemplate = proto.CloneOf(item)
+		if title != nil {
+			updatedMemoTemplate.Title = *title
+		}
+		if content != nil {
+			updatedMemoTemplate.Content = *content
+		}
+		memoTemplates = append(memoTemplates, updatedMemoTemplate)
+	}
+	if updatedMemoTemplate == nil {
+		return nil, nil
+	}
+
+	if err := s.upsertUserMemoTemplates(ctx, userID, memoTemplates); err != nil {
+		return nil, errors.Wrap(err, "update memo template")
+	}
+	return updatedMemoTemplate, nil
+}
+
+// RemoveUserMemoTemplate removes the memo template of the user.
+// It reports whether a matching memo template was found.
+func (s *Store) RemoveUserMemoTemplate(ctx context.Context, userID int32, memoTemplateID string) (bool, error) {
+	s.memoTemplateMu.Lock()
+	defer s.memoTemplateMu.Unlock()
+
+	existing, err := s.GetUserMemoTemplates(ctx, userID)
+	if err != nil {
+		return false, errors.Wrap(err, "get existing memo templates")
+	}
+
+	found := false
+	memoTemplates := make([]*storepb.MemoTemplatesUserSetting_MemoTemplate, 0, len(existing))
+	for _, item := range existing {
+		if item.GetId() == memoTemplateID {
+			found = true
+			continue
+		}
+		memoTemplates = append(memoTemplates, item)
+	}
+	if !found {
+		return false, nil
+	}
+
+	if err := s.upsertUserMemoTemplates(ctx, userID, memoTemplates); err != nil {
+		return false, errors.Wrap(err, "remove memo template")
+	}
+	return true, nil
+}
+
+func (s *Store) upsertUserMemoTemplates(ctx context.Context, userID int32, memoTemplates []*storepb.MemoTemplatesUserSetting_MemoTemplate) error {
+	_, err := s.UpsertUserSetting(ctx, &storepb.UserSetting{
+		UserId: userID,
+		Key:    storepb.UserSetting_MEMO_TEMPLATES,
+		Value: &storepb.UserSetting_MemoTemplates{
+			MemoTemplates: &storepb.MemoTemplatesUserSetting{
+				MemoTemplates: memoTemplates,
+			},
+		},
+	})
+	return errors.Wrap(err, "upsert memo templates user setting")
+}
+
 func convertUserSettingFromRaw(raw *UserSetting) (*storepb.UserSetting, error) {
 	userSetting := &storepb.UserSetting{
 		UserId: raw.UserID,
@@ -640,6 +774,12 @@ func convertUserSettingFromRaw(raw *UserSetting) (*storepb.UserSetting, error) {
 			return nil, err
 		}
 		userSetting.Value = &storepb.UserSetting_MemoViews{MemoViews: memoViewsUserSetting}
+	case storepb.UserSetting_MEMO_TEMPLATES:
+		memoTemplatesUserSetting := &storepb.MemoTemplatesUserSetting{}
+		if err := protojsonUnmarshaler.Unmarshal([]byte(raw.Value), memoTemplatesUserSetting); err != nil {
+			return nil, err
+		}
+		userSetting.Value = &storepb.UserSetting_MemoTemplates{MemoTemplates: memoTemplatesUserSetting}
 	case storepb.UserSetting_GENERAL:
 		generalUserSetting := &storepb.GeneralUserSetting{}
 		if err := protojsonUnmarshaler.Unmarshal([]byte(raw.Value), generalUserSetting); err != nil {
@@ -686,6 +826,13 @@ func convertUserSettingToRaw(userSetting *storepb.UserSetting) (*UserSetting, er
 	case storepb.UserSetting_MEMO_VIEWS:
 		memoViewsUserSetting := userSetting.GetMemoViews()
 		value, err := protojson.Marshal(memoViewsUserSetting)
+		if err != nil {
+			return nil, err
+		}
+		raw.Value = string(value)
+	case storepb.UserSetting_MEMO_TEMPLATES:
+		memoTemplatesUserSetting := userSetting.GetMemoTemplates()
+		value, err := protojson.Marshal(memoTemplatesUserSetting)
 		if err != nil {
 			return nil, err
 		}

@@ -156,6 +156,8 @@
       "image-upload-failed": "Не вдалося завантажити деякі зображення. Повторіть спробу або збережіть завантажені файли як вкладення.",
       "image-upload-stopped": "Завантаження зображення зупинено {{completed}}/{{total}}",
       "insert-image": "Вставити зображення",
+      "templates": "Templates",
+      "no-templates": "No saved templates",
       "keep-as-attachments": "Зберегти як вкладення",
       "uploading-inline-image": "Завантаження до контенту",
       "uploading-images": "Завантаження зображень {{completed}}/{{total}}"
@@ -484,6 +486,25 @@
       "delete-confirm": "Ви впевнені, що хочете видалити подання `{{title}}`?",
       "delete-success": "Подання `{{title}}` успішно видалено",
       "change-icon": "Змінити піктограму подання"
+    },
+    "templates": {
+      "label": "Templates",
+      "title": "Memo templates",
+      "description": "Create reusable starting points for daily logs, meeting notes, and other recurring memos.",
+      "create": "New template",
+      "create-title": "Create template",
+      "edit": "Edit template",
+      "name": "Template name",
+      "name-placeholder": "Daily log",
+      "content": "Template content",
+      "content-placeholder": "# Daily log\n\nWhat happened today?",
+      "required-fields": "A name and some content are required.",
+      "no-templates": "No templates yet.",
+      "create-success": "Template created",
+      "update-success": "Template updated",
+      "delete-title": "Delete template `{{title}}`?",
+      "delete-description": "This template will be permanently deleted.",
+      "delete-success": "Template deleted"
     },
     "sso": {
       "authorization-endpoint": "Точка авторизації",

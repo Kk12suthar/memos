@@ -39,6 +39,11 @@ const (
 	UserService_CreateMemoView_FullMethodName              = "/memos.api.v1.UserService/CreateMemoView"
 	UserService_UpdateMemoView_FullMethodName              = "/memos.api.v1.UserService/UpdateMemoView"
 	UserService_DeleteMemoView_FullMethodName              = "/memos.api.v1.UserService/DeleteMemoView"
+	UserService_ListMemoTemplates_FullMethodName           = "/memos.api.v1.UserService/ListMemoTemplates"
+	UserService_GetMemoTemplate_FullMethodName             = "/memos.api.v1.UserService/GetMemoTemplate"
+	UserService_CreateMemoTemplate_FullMethodName          = "/memos.api.v1.UserService/CreateMemoTemplate"
+	UserService_UpdateMemoTemplate_FullMethodName          = "/memos.api.v1.UserService/UpdateMemoTemplate"
+	UserService_DeleteMemoTemplate_FullMethodName          = "/memos.api.v1.UserService/DeleteMemoTemplate"
 	UserService_ListLinkedIdentities_FullMethodName        = "/memos.api.v1.UserService/ListLinkedIdentities"
 	UserService_CreateLinkedIdentity_FullMethodName        = "/memos.api.v1.UserService/CreateLinkedIdentity"
 	UserService_GetLinkedIdentity_FullMethodName           = "/memos.api.v1.UserService/GetLinkedIdentity"
@@ -108,6 +113,16 @@ type UserServiceClient interface {
 	UpdateMemoView(ctx context.Context, in *UpdateMemoViewRequest, opts ...grpc.CallOption) (*MemoView, error)
 	// DeleteMemoView deletes a memo view for a user.
 	DeleteMemoView(ctx context.Context, in *DeleteMemoViewRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// ListMemoTemplates returns the reusable memo templates owned by a user.
+	ListMemoTemplates(ctx context.Context, in *ListMemoTemplatesRequest, opts ...grpc.CallOption) (*ListMemoTemplatesResponse, error)
+	// GetMemoTemplate gets a reusable memo template by name.
+	GetMemoTemplate(ctx context.Context, in *GetMemoTemplateRequest, opts ...grpc.CallOption) (*MemoTemplate, error)
+	// CreateMemoTemplate creates a reusable memo template for a user.
+	CreateMemoTemplate(ctx context.Context, in *CreateMemoTemplateRequest, opts ...grpc.CallOption) (*MemoTemplate, error)
+	// UpdateMemoTemplate updates a reusable memo template for a user.
+	UpdateMemoTemplate(ctx context.Context, in *UpdateMemoTemplateRequest, opts ...grpc.CallOption) (*MemoTemplate, error)
+	// DeleteMemoTemplate deletes a reusable memo template for a user.
+	DeleteMemoTemplate(ctx context.Context, in *DeleteMemoTemplateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// ListLinkedIdentities returns a list of linked SSO identities for a user.
 	ListLinkedIdentities(ctx context.Context, in *ListLinkedIdentitiesRequest, opts ...grpc.CallOption) (*ListLinkedIdentitiesResponse, error)
 	// CreateLinkedIdentity links an SSO identity to the authenticated user.
@@ -332,6 +347,56 @@ func (c *userServiceClient) DeleteMemoView(ctx context.Context, in *DeleteMemoVi
 	return out, nil
 }
 
+func (c *userServiceClient) ListMemoTemplates(ctx context.Context, in *ListMemoTemplatesRequest, opts ...grpc.CallOption) (*ListMemoTemplatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListMemoTemplatesResponse)
+	err := c.cc.Invoke(ctx, UserService_ListMemoTemplates_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) GetMemoTemplate(ctx context.Context, in *GetMemoTemplateRequest, opts ...grpc.CallOption) (*MemoTemplate, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MemoTemplate)
+	err := c.cc.Invoke(ctx, UserService_GetMemoTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) CreateMemoTemplate(ctx context.Context, in *CreateMemoTemplateRequest, opts ...grpc.CallOption) (*MemoTemplate, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MemoTemplate)
+	err := c.cc.Invoke(ctx, UserService_CreateMemoTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) UpdateMemoTemplate(ctx context.Context, in *UpdateMemoTemplateRequest, opts ...grpc.CallOption) (*MemoTemplate, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MemoTemplate)
+	err := c.cc.Invoke(ctx, UserService_UpdateMemoTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userServiceClient) DeleteMemoTemplate(ctx context.Context, in *DeleteMemoTemplateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, UserService_DeleteMemoTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *userServiceClient) ListLinkedIdentities(ctx context.Context, in *ListLinkedIdentitiesRequest, opts ...grpc.CallOption) (*ListLinkedIdentitiesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListLinkedIdentitiesResponse)
@@ -534,6 +599,16 @@ type UserServiceServer interface {
 	UpdateMemoView(context.Context, *UpdateMemoViewRequest) (*MemoView, error)
 	// DeleteMemoView deletes a memo view for a user.
 	DeleteMemoView(context.Context, *DeleteMemoViewRequest) (*emptypb.Empty, error)
+	// ListMemoTemplates returns the reusable memo templates owned by a user.
+	ListMemoTemplates(context.Context, *ListMemoTemplatesRequest) (*ListMemoTemplatesResponse, error)
+	// GetMemoTemplate gets a reusable memo template by name.
+	GetMemoTemplate(context.Context, *GetMemoTemplateRequest) (*MemoTemplate, error)
+	// CreateMemoTemplate creates a reusable memo template for a user.
+	CreateMemoTemplate(context.Context, *CreateMemoTemplateRequest) (*MemoTemplate, error)
+	// UpdateMemoTemplate updates a reusable memo template for a user.
+	UpdateMemoTemplate(context.Context, *UpdateMemoTemplateRequest) (*MemoTemplate, error)
+	// DeleteMemoTemplate deletes a reusable memo template for a user.
+	DeleteMemoTemplate(context.Context, *DeleteMemoTemplateRequest) (*emptypb.Empty, error)
 	// ListLinkedIdentities returns a list of linked SSO identities for a user.
 	ListLinkedIdentities(context.Context, *ListLinkedIdentitiesRequest) (*ListLinkedIdentitiesResponse, error)
 	// CreateLinkedIdentity links an SSO identity to the authenticated user.
@@ -631,6 +706,21 @@ func (UnimplementedUserServiceServer) UpdateMemoView(context.Context, *UpdateMem
 }
 func (UnimplementedUserServiceServer) DeleteMemoView(context.Context, *DeleteMemoViewRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteMemoView not implemented")
+}
+func (UnimplementedUserServiceServer) ListMemoTemplates(context.Context, *ListMemoTemplatesRequest) (*ListMemoTemplatesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListMemoTemplates not implemented")
+}
+func (UnimplementedUserServiceServer) GetMemoTemplate(context.Context, *GetMemoTemplateRequest) (*MemoTemplate, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetMemoTemplate not implemented")
+}
+func (UnimplementedUserServiceServer) CreateMemoTemplate(context.Context, *CreateMemoTemplateRequest) (*MemoTemplate, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateMemoTemplate not implemented")
+}
+func (UnimplementedUserServiceServer) UpdateMemoTemplate(context.Context, *UpdateMemoTemplateRequest) (*MemoTemplate, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateMemoTemplate not implemented")
+}
+func (UnimplementedUserServiceServer) DeleteMemoTemplate(context.Context, *DeleteMemoTemplateRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteMemoTemplate not implemented")
 }
 func (UnimplementedUserServiceServer) ListLinkedIdentities(context.Context, *ListLinkedIdentitiesRequest) (*ListLinkedIdentitiesResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListLinkedIdentities not implemented")
@@ -1022,6 +1112,96 @@ func _UserService_DeleteMemoView_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _UserService_ListMemoTemplates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMemoTemplatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).ListMemoTemplates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_ListMemoTemplates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).ListMemoTemplates(ctx, req.(*ListMemoTemplatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_GetMemoTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMemoTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).GetMemoTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_GetMemoTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).GetMemoTemplate(ctx, req.(*GetMemoTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_CreateMemoTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateMemoTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).CreateMemoTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_CreateMemoTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).CreateMemoTemplate(ctx, req.(*CreateMemoTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_UpdateMemoTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemoTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).UpdateMemoTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_UpdateMemoTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).UpdateMemoTemplate(ctx, req.(*UpdateMemoTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _UserService_DeleteMemoTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteMemoTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServiceServer).DeleteMemoTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: UserService_DeleteMemoTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServiceServer).DeleteMemoTemplate(ctx, req.(*DeleteMemoTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _UserService_ListLinkedIdentities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListLinkedIdentitiesRequest)
 	if err := dec(in); err != nil {
@@ -1370,6 +1550,26 @@ var UserService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteMemoView",
 			Handler:    _UserService_DeleteMemoView_Handler,
+		},
+		{
+			MethodName: "ListMemoTemplates",
+			Handler:    _UserService_ListMemoTemplates_Handler,
+		},
+		{
+			MethodName: "GetMemoTemplate",
+			Handler:    _UserService_GetMemoTemplate_Handler,
+		},
+		{
+			MethodName: "CreateMemoTemplate",
+			Handler:    _UserService_CreateMemoTemplate_Handler,
+		},
+		{
+			MethodName: "UpdateMemoTemplate",
+			Handler:    _UserService_UpdateMemoTemplate_Handler,
+		},
+		{
+			MethodName: "DeleteMemoTemplate",
+			Handler:    _UserService_DeleteMemoTemplate_Handler,
 		},
 		{
 			MethodName: "ListLinkedIdentities",

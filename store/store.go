@@ -20,6 +20,7 @@ type Store struct {
 	refreshTokenMu sync.Mutex
 	patMu          sync.Mutex
 	memoViewMu     sync.Mutex
+	memoTemplateMu sync.Mutex
 
 	deploymentConfigMu sync.RWMutex
 	deploymentConfig   *deploymentConfiguration
