@@ -472,6 +472,10 @@
       "theme-description": "Natychmiast stosuje wybrany motyw na tym urządzeniu.",
       "save-media-metadata": "Zapisz metadane multimediów",
       "save-media-metadata-description": "Na potrzeby przyszłych przesyłów zapisz dostępne ustawienia aparatu, czas przechwytywania, lokalizację, wymiary obrazu i podstawowe szczegóły wideo. Każdy, kto może wyświetlić załącznik, może otrzymać te metadane. Istniejące załączniki pozostają niezmienione.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Kontroluj informacje wrażliwe dotyczące prywatności przesyłane wraz z przesłanymi multimediami.",
       "uploads-privacy-title": "Przesyłanie i prywatność"
     },

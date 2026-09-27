@@ -1,9 +1,11 @@
 package email
 
 import (
+	"context"
 	"crypto/tls"
 	"net"
 	"net/smtp"
+	"sync"
 	"time"
 
 	"github.com/pkg/errors"
@@ -49,6 +51,18 @@ func (c *Client) createTLSConfig() *tls.Config {
 
 // Send sends an email message via SMTP.
 func (c *Client) Send(message *Message) error {
+	return c.SendContext(context.Background(), message)
+}
+
+// SendContext sends an email message via SMTP and closes the active connection
+// when ctx is canceled.
+func (c *Client) SendContext(ctx context.Context, message *Message) error {
+	if ctx == nil {
+		ctx = context.Background()
+	}
+	if err := ctx.Err(); err != nil {
+		return err
+	}
 	// Validate configuration
 	if err := c.validateConfig(); err != nil {
 		return errors.Wrap(err, "invalid email configuration")
@@ -73,22 +87,28 @@ func (c *Client) Send(message *Message) error {
 
 	// Send based on encryption type
 	if c.config.UseSSL {
-		return c.sendWithSSL(auth, recipients, body)
+		return c.sendWithSSLContext(ctx, auth, recipients, body)
 	}
-	return c.sendWithTLS(auth, recipients, body)
+	return c.sendWithTLSContext(ctx, auth, recipients, body)
 }
 
 // sendWithTLS sends email using STARTTLS (port 587).
 func (c *Client) sendWithTLS(auth smtp.Auth, recipients []string, body string) error {
+	return c.sendWithTLSContext(context.Background(), auth, recipients, body)
+}
+
+func (c *Client) sendWithTLSContext(ctx context.Context, auth smtp.Auth, recipients []string, body string) error {
 	serverAddr := c.config.GetServerAddress()
 
 	dialer := &net.Dialer{Timeout: smtpOperationTimeout}
-	conn, err := dialer.Dial("tcp", serverAddr)
+	conn, err := dialer.DialContext(ctx, "tcp", serverAddr)
 	if err != nil {
 		return errors.Wrapf(err, "failed to connect to SMTP server: %s", serverAddr)
 	}
 	defer conn.Close()
-	if err := conn.SetDeadline(time.Now().Add(smtpOperationTimeout)); err != nil {
+	stopCloseOnCancel := closeConnectionOnCancel(ctx, conn)
+	defer stopCloseOnCancel()
+	if err := conn.SetDeadline(smtpDeadline(ctx)); err != nil {
 		return errors.Wrap(err, "failed to set SMTP connection deadline")
 	}
 
@@ -112,18 +132,28 @@ func (c *Client) sendWithTLS(auth smtp.Auth, recipients []string, body string) e
 
 // sendWithSSL sends email using SSL/TLS (port 465).
 func (c *Client) sendWithSSL(auth smtp.Auth, recipients []string, body string) error {
+	return c.sendWithSSLContext(context.Background(), auth, recipients, body)
+}
+
+func (c *Client) sendWithSSLContext(ctx context.Context, auth smtp.Auth, recipients []string, body string) error {
 	serverAddr := c.config.GetServerAddress()
 
 	// Create TLS connection
 	tlsConfig := c.createTLSConfig()
 	dialer := &net.Dialer{Timeout: smtpOperationTimeout}
-	conn, err := tls.DialWithDialer(dialer, "tcp", serverAddr, tlsConfig)
+	rawConn, err := dialer.DialContext(ctx, "tcp", serverAddr)
 	if err != nil {
 		return errors.Wrapf(err, "failed to connect to SMTP server with SSL: %s", serverAddr)
 	}
+	conn := tls.Client(rawConn, tlsConfig)
 	defer conn.Close()
-	if err := conn.SetDeadline(time.Now().Add(smtpOperationTimeout)); err != nil {
+	stopCloseOnCancel := closeConnectionOnCancel(ctx, conn)
+	defer stopCloseOnCancel()
+	if err := conn.SetDeadline(smtpDeadline(ctx)); err != nil {
 		return errors.Wrap(err, "failed to set SMTP connection deadline")
+	}
+	if err := conn.HandshakeContext(ctx); err != nil {
+		return errors.Wrap(err, "failed to establish SMTP SSL connection")
 	}
 
 	// Create SMTP client
@@ -134,6 +164,29 @@ func (c *Client) sendWithSSL(auth smtp.Auth, recipients []string, body string) e
 	defer client.Quit()
 
 	return c.sendWithClient(client, auth, recipients, body)
+}
+
+func smtpDeadline(ctx context.Context) time.Time {
+	deadline := time.Now().Add(smtpOperationTimeout)
+	if ctxDeadline, ok := ctx.Deadline(); ok && ctxDeadline.Before(deadline) {
+		return ctxDeadline
+	}
+	return deadline
+}
+
+func closeConnectionOnCancel(ctx context.Context, conn net.Conn) func() {
+	stop := make(chan struct{})
+	var once sync.Once
+	go func() {
+		select {
+		case <-ctx.Done():
+			_ = conn.Close()
+		case <-stop:
+		}
+	}()
+	return func() {
+		once.Do(func() { close(stop) })
+	}
 }
 
 func (c *Client) sendWithClient(client *smtp.Client, auth smtp.Auth, recipients []string, body string) error {

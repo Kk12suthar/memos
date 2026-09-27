@@ -588,6 +588,10 @@
       "theme": "Тема",
       "save-media-metadata": "Запазване на медийни метаданни",
       "save-media-metadata-description": "За бъдещи качвания, запазете наличната камера, времето на заснемане, местоположението, размерите на изображението и основните подробности за видеото. Всеки, който може да преглежда прикачения файл, може да получи тези метаданни. Съществуващите прикачени файлове остават непроменени.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Контролирайте поверителната информация, изпратена с качените медийни файлове.",
       "uploads-privacy-title": "Качвания и поверителност"
     },

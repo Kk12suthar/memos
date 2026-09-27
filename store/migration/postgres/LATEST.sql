@@ -151,3 +151,12 @@ CREATE TABLE user_identity (
 );
 
 CREATE INDEX idx_user_identity_user_id ON user_identity(user_id);
+
+-- weekly_digest_delivery
+CREATE TABLE weekly_digest_delivery (
+  user_id      INTEGER NOT NULL,
+  period_key   TEXT    NOT NULL,
+  claimed_ts   BIGINT  NOT NULL,
+  delivered_ts BIGINT  DEFAULT NULL,
+  PRIMARY KEY (user_id, period_key)
+);

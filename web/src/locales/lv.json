@@ -588,6 +588,10 @@
       "theme": "Tēma",
       "save-media-metadata": "Saglabāt multivides metadatus",
       "save-media-metadata-description": "Turpmākām augšupielādēm saglabājiet pieejamo kameru, uzņemšanas laiku, atrašanās vietu, attēla izmērus un pamata video informāciju. Ikviens, kurš var skatīt pielikumu, var saņemt šos metadatus. Esošie pielikumi netiek mainīti.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Kontrolējiet konfidenciālu informāciju, kas iesniegta kopā ar augšupielādēto multividi.",
       "uploads-privacy-title": "Augšupielādes un konfidencialitāte"
     },

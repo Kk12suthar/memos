@@ -381,6 +381,10 @@
       "memo-defaults-title": "मेमो डिफ़ॉल्ट",
       "save-media-metadata": "मीडिया मेटाडेटा सेव करें",
       "save-media-metadata-description": "आगे के अपलोड के लिए, उपलब्ध कैमरा, कैप्चर टाइम, लोकेशन, इमेज डाइमेंशन और बेसिक वीडियो डिटेल्स सेव करें। जो कोई भी अटैचमेंट देख सकता है, उसे यह मेटाडेटा मिल सकता है। मौजूदा अटैचमेंट में कोई बदलाव नहीं होता है।",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "theme-description": "चुनी गई थीम को तुरंत इस डिवाइस पर लागू करता है।",
       "uploads-privacy-description": "अपलोड किए गए मीडिया के साथ सबमिट की गई प्राइवेसी-सेंसिटिव जानकारी को कंट्रोल करें।",
       "uploads-privacy-title": "अपलोड और प्राइवेसी"

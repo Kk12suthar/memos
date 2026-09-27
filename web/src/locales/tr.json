@@ -634,6 +634,10 @@
       "memo-defaults-title": "Not varsayılanları",
       "save-media-metadata": "Medya meta verilerini kaydet",
       "save-media-metadata-description": "Sonraki yüklemelerde mevcut kamera, çekim zamanı, konum, görsel boyutları ve temel video bilgilerini kaydeder. Eki görüntüleyebilen herkes bu meta verilere ulaşabilir. Mevcut ekler değişmez.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "theme-description": "Seçilen temayı bu cihaza hemen uygular."
     },
     "memo-view": {

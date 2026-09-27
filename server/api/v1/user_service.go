@@ -14,6 +14,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/emptypb"
 
 	"github.com/usememos/memos/internal/clientip"
@@ -526,9 +527,10 @@ func convertUserWriteError(err error, context string) error {
 
 func getDefaultUserGeneralSetting() *v1pb.UserSetting_GeneralSetting {
 	return &v1pb.UserSetting_GeneralSetting{
-		Locale:         "en",
-		MemoVisibility: "PRIVATE",
-		Theme:          "",
+		Locale:                  "en",
+		MemoVisibility:          "PRIVATE",
+		Theme:                   "",
+		WeeklyMemoSummaryEmails: proto.Bool(false),
 	}
 }
 

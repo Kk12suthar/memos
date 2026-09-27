@@ -381,6 +381,10 @@
       "memo-defaults-title": "Cài đặt mặc định ghi chú",
       "save-media-metadata": "Lưu siêu dữ liệu phương tiện",
       "save-media-metadata-description": "Đối với các lần tải lên trong tương lai, hãy lưu thông tin về máy ảnh, thời gian chụp, vị trí, kích thước hình ảnh và chi tiết video cơ bản. Bất kỳ ai có thể xem tệp đính kèm đều có thể nhận được siêu dữ liệu này. Các tệp đính kèm hiện có không thay đổi.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "theme-description": "Áp dụng chủ đề đã chọn ngay lập tức trên thiết bị này.",
       "uploads-privacy-description": "Kiểm soát thông tin nhạy cảm về quyền riêng tư được gửi kèm theo phương tiện đã tải lên.",
       "uploads-privacy-title": "Tải lên & quyền riêng tư"

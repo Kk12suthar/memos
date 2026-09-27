@@ -14,6 +14,7 @@ vi.mock("@/contexts/AuthContext", () => ({
       memoVisibility: "PRIVATE",
       theme: "system",
       saveMediaMetadata: false,
+      weeklyMemoSummaryEmails: false,
     },
     refetchSettings: mocks.refetchSettings,
   }),
@@ -50,6 +51,18 @@ describe("PreferencesSection media metadata setting", () => {
     expect(mocks.mutate.mock.calls[0][0]).toEqual({
       generalSetting: { saveMediaMetadata: true },
       updateMask: ["save_media_metadata"],
+    });
+  });
+
+  it("updates the weekly memo summary email preference with its field mask", () => {
+    render(<PreferencesSection />);
+
+    fireEvent.click(screen.getByRole("switch", { name: "setting.preference.weekly-summary-emails" }));
+
+    expect(mocks.mutate).toHaveBeenCalledOnce();
+    expect(mocks.mutate.mock.calls[0][0]).toEqual({
+      generalSetting: { weeklyMemoSummaryEmails: true },
+      updateMask: ["weekly_memo_summary_emails"],
     });
   });
 });

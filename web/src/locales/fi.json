@@ -588,6 +588,10 @@
       "theme": "Teema",
       "save-media-metadata": "Tallenna median metatiedot",
       "save-media-metadata-description": "Tallenna käytettävissä oleva kamera, kuvausaika, sijainti, kuvan mitat ja videon perustiedot tulevia latauksia varten. Kuka tahansa, joka voi tarkastella liitettä, voi vastaanottaa nämä metatiedot. Olemassa olevat liitteet pysyvät muuttumattomina.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Hallitse ladatun median mukana lähetettyjä yksityisyyttä suojaavia tietoja.",
       "uploads-privacy-title": "Lataukset ja tietosuoja"
     },

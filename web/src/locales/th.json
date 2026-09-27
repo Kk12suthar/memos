@@ -381,6 +381,10 @@
       "memo-defaults-title": "ค่าเริ่มต้นของบันทึกช่วยจำ",
       "save-media-metadata": "บันทึกข้อมูลเมตาของสื่อ",
       "save-media-metadata-description": "สำหรับการอัปโหลดในอนาคต ให้บันทึกกล้องที่ใช้งานได้ เวลาถ่ายภาพ ตำแหน่ง ขนาดภาพ และรายละเอียดวิดีโอพื้นฐาน ผู้ที่สามารถดูไฟล์แนบได้จะได้รับข้อมูลเมตานี้ ไฟล์แนบที่มีอยู่จะไม่มีการเปลี่ยนแปลง",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "theme-description": "ใช้ธีมที่เลือกทันทีบนอุปกรณ์นี้",
       "uploads-privacy-description": "ควบคุมข้อมูลที่ละเอียดอ่อนด้านความเป็นส่วนตัวที่ส่งมาพร้อมกับสื่อที่อัปโหลด",
       "uploads-privacy-title": "การอัปโหลดและความเป็นส่วนตัว"

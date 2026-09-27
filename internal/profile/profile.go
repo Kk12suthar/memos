@@ -36,6 +36,8 @@ type Profile struct {
 	InstanceURL string
 	// RateLimit enables the request rate limiter. Off restores unbounded behavior.
 	RateLimit bool
+	// WeeklyDigest enables the server-owned weekly digest runner.
+	WeeklyDigest bool
 	// TrustedProxies lists the proxies whose forwarding headers identify the
 	// client: CIDRs, addresses, or the keywords "private" and "none".
 	TrustedProxies []string

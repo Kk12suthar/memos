@@ -472,6 +472,10 @@
       "theme-description": "Вибрану тему негайно застосовує на цьому пристрої.",
       "save-media-metadata": "Зберегти метадані медіа",
       "save-media-metadata-description": "Для майбутніх завантажень зберігати доступну камеру, час зйомки, місцезнаходження, розміри зображення та основні відомості про відео. Будь-хто, хто може переглядати вкладення, може отримати ці метадані. Існуючі вкладення залишаються незмінними.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Контролювати конфіденційну інформацію, що надсилається разом із завантаженими медіафайлами.",
       "uploads-privacy-title": "Завантаження та конфіденційність"
     },

@@ -1,6 +1,7 @@
 package email
 
 import (
+	"context"
 	"log/slog"
 
 	"github.com/pkg/errors"
@@ -38,6 +39,13 @@ func init() {
 // Send sends an email synchronously.
 // Returns an error if the email fails to send.
 func Send(config *Config, message *Message) error {
+	return SendContext(context.Background(), config, message)
+}
+
+// SendContext sends an email synchronously and stops promptly when ctx is
+// canceled. The context is especially important for background work that must
+// finish before the owning service closes.
+func SendContext(ctx context.Context, config *Config, message *Message) error {
 	if config == nil {
 		return errors.New("email configuration is required")
 	}
@@ -46,7 +54,7 @@ func Send(config *Config, message *Message) error {
 	}
 
 	client := NewClient(config)
-	return client.Send(message)
+	return client.SendContext(ctx, message)
 }
 
 // SendAsync sends an email asynchronously.

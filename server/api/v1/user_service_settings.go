@@ -115,6 +115,8 @@ func (s *APIV1Service) UpdateUserSetting(ctx context.Context, request *v1pb.Upda
 				updatedGeneral.Locale = incomingGeneral.Locale
 			case "save_media_metadata":
 				updatedGeneral.SaveMediaMetadata = incomingGeneral.SaveMediaMetadata
+			case "weekly_memo_summary_emails":
+				updatedGeneral.WeeklyMemoSummaryEmails = incomingGeneral.WeeklyMemoSummaryEmails
 			default:
 				// Ignore unsupported fields.
 			}

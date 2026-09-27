@@ -5163,6 +5163,9 @@ components:
                 saveMediaMetadata:
                     type: boolean
                     description: Whether the official client should save metadata from future media uploads.
+                weeklyMemoSummaryEmails:
+                    type: boolean
+                    description: Whether the user should receive a weekly memo summary email.
             description: General user settings configuration.
         UserSetting_TagMetadata:
             type: object

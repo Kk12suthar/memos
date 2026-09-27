@@ -381,6 +381,10 @@
       "memo-defaults-title": "Padrões de memorando",
       "save-media-metadata": "Salvar metadados de mídia",
       "save-media-metadata-description": "Para uploads futuros, salve a câmera disponível, a hora da captura, a localização, as dimensões da imagem e detalhes básicos do vídeo. Qualquer pessoa que possa visualizar o anexo poderá receber esses metadados. Os anexos existentes permanecem inalterados.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "theme-description": "Aplica o tema selecionado imediatamente neste dispositivo.",
       "uploads-privacy-description": "Controle as informações confidenciais de privacidade enviadas com a mídia carregada.",
       "uploads-privacy-title": "Uploads e privacidade"

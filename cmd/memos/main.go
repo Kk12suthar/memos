@@ -54,6 +54,7 @@ func init() {
 	viper.SetDefault("demo", false)
 	viper.SetDefault("driver", "sqlite")
 	viper.SetDefault("port", 8081)
+	viper.SetDefault("weekly-digest", false)
 
 	rootCmd.Flags().Bool("demo", false, "enable demo mode")
 	rootCmd.Flags().String("addr", "", "address of server")
@@ -67,6 +68,7 @@ func init() {
 	rootCmd.Flags().StringSlice("webhook-private-network-allowlist", nil, "private webhook destinations to allow (exact hostname, IP, or CIDR)")
 	rootCmd.Flags().String("log-level", "info", "log verbosity level (debug, info, warn, error)")
 	rootCmd.Flags().Bool("rate-limit", true, "enable request rate limiting")
+	rootCmd.Flags().Bool("weekly-digest", false, "enable weekly digest email delivery")
 	rootCmd.Flags().StringSlice("trusted-proxies", []string{"private"}, "proxies whose forwarding headers identify the client: CIDRs, IPs, \"private\" (default; the loopback and private ranges), or \"none\" when the instance is reached without a header-rewriting proxy")
 
 	if err := rootCmd.Flags().MarkDeprecated("allow-private-webhooks", "use --webhook-private-network-allowlist to allow only required destinations"); err != nil {
@@ -85,6 +87,7 @@ func init() {
 		"webhook-private-network-allowlist",
 		"log-level",
 		"rate-limit",
+		"weekly-digest",
 		"trusted-proxies",
 	} {
 		if err := viper.BindPFlag(key, rootCmd.Flags().Lookup(key)); err != nil {
@@ -118,6 +121,7 @@ func runServer() error {
 		DSN:            viper.GetString("dsn"),
 		InstanceURL:    viper.GetString("instance-url"),
 		RateLimit:      viper.GetBool("rate-limit"),
+		WeeklyDigest:   viper.GetBool("weekly-digest"),
 		TrustedProxies: viper.GetStringSlice("trusted-proxies"),
 		Version:        version.GetCurrentVersion(),
 		Commit:         version.Commit,

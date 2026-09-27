@@ -381,6 +381,10 @@
       "memo-defaults-title": "Default memo",
       "save-media-metadata": "Menyimpan metadata media",
       "save-media-metadata-description": "Untuk unggahan di masa mendatang, simpan kamera yang tersedia, waktu pengambilan gambar, lokasi, dimensi gambar, dan detail video dasar. Siapa pun yang dapat melihat lampiran dapat menerima metadata ini. Lampiran yang sudah ada tidak berubah.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "theme-description": "Menerapkan tema yang dipilih secara instan pada perangkat ini.",
       "uploads-privacy-description": "Mengontrol informasi sensitif privasi yang dikirimkan dengan media yang diunggah.",
       "uploads-privacy-title": "Unggahan & privasi"

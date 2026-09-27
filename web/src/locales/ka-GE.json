@@ -472,6 +472,10 @@
       "theme-description": "არჩეულ თემას დაუყოვნებლივ იყენებს ამ მოწყობილობაზე.",
       "save-media-metadata": "შეინახეთ მედია მეტამონაცემები",
       "save-media-metadata-description": "მომავალი ატვირთვებისთვის შეინახეთ ხელმისაწვდომი კამერა, გადაღების დრო, ადგილმდებარეობა, სურათის ზომები და ვიდეოს ძირითადი დეტალები. ყველას, ვისაც შეუძლია დანართის ნახვა, შეუძლია მიიღოს ეს მეტამონაცემები. არსებული დანართები უცვლელია.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "ატვირთულ მედიასთან ერთად წარდგენილი კონფიდენციალურობისადმი მგრძნობიარე ინფორმაციის კონტროლი.",
       "uploads-privacy-title": "ატვირთვები და კონფიდენციალურობა"
     },

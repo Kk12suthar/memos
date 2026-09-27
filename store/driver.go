@@ -73,6 +73,13 @@ type Driver interface {
 	DeleteUserSettings(ctx context.Context, delete *DeleteUserSetting) error
 	GetUserByPATHash(ctx context.Context, tokenHash string) (*PATQueryResult, error)
 
+	// Weekly digest delivery ledger methods.
+	ClaimWeeklyDigestDelivery(ctx context.Context, claim *WeeklyDigestDelivery) (bool, error)
+	MarkWeeklyDigestDelivered(ctx context.Context, delivery *WeeklyDigestDelivery) error
+	ReleaseWeeklyDigestDelivery(ctx context.Context, delivery *WeeklyDigestDelivery) error
+	PruneWeeklyDigestDeliveries(ctx context.Context, beforeUnix int64) error
+	ListWeeklyDigestDeliveries(ctx context.Context, find *FindWeeklyDigestDelivery) ([]*WeeklyDigestDelivery, error)
+
 	// IdentityProvider model related methods.
 	CreateIdentityProvider(ctx context.Context, create *IdentityProvider) (*IdentityProvider, error)
 	ListIdentityProviders(ctx context.Context, find *FindIdentityProvider) ([]*IdentityProvider, error)

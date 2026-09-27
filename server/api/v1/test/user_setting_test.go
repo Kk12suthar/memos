@@ -113,6 +113,47 @@ func TestGeneralUserSettingSaveMediaMetadata(t *testing.T) {
 	require.False(t, updated.GetGeneralSetting().GetSaveMediaMetadata())
 }
 
+func TestGeneralUserSettingWeeklyMemoSummaryEmails(t *testing.T) {
+	ctx := context.Background()
+	ts := NewTestService(t)
+	defer ts.Cleanup()
+
+	user, err := ts.CreateRegularUser(ctx, "weekly-summary-user")
+	require.NoError(t, err)
+	userCtx := ts.CreateUserContext(ctx, user.ID)
+	settingName := "users/weekly-summary-user/settings/GENERAL"
+
+	defaultSetting, err := ts.Service.GetUserSetting(userCtx, &apiv1.GetUserSettingRequest{Name: settingName})
+	require.NoError(t, err)
+	require.False(t, defaultSetting.GetGeneralSetting().GetWeeklyMemoSummaryEmails())
+
+	weeklyOptIn := true
+	updated, err := ts.Service.UpdateUserSetting(userCtx, &apiv1.UpdateUserSettingRequest{
+		Setting: &apiv1.UserSetting{
+			Name: settingName,
+			Value: &apiv1.UserSetting_GeneralSetting_{
+				GeneralSetting: &apiv1.UserSetting_GeneralSetting{WeeklyMemoSummaryEmails: &weeklyOptIn},
+			},
+		},
+		UpdateMask: &fieldmaskpb.FieldMask{Paths: []string{"weekly_memo_summary_emails"}},
+	})
+	require.NoError(t, err)
+	require.True(t, updated.GetGeneralSetting().GetWeeklyMemoSummaryEmails())
+
+	weeklyOptIn = false
+	updated, err = ts.Service.UpdateUserSetting(userCtx, &apiv1.UpdateUserSettingRequest{
+		Setting: &apiv1.UserSetting{
+			Name: settingName,
+			Value: &apiv1.UserSetting_GeneralSetting_{
+				GeneralSetting: &apiv1.UserSetting_GeneralSetting{WeeklyMemoSummaryEmails: &weeklyOptIn},
+			},
+		},
+		UpdateMask: &fieldmaskpb.FieldMask{Paths: []string{"weekly_memo_summary_emails"}},
+	})
+	require.NoError(t, err)
+	require.False(t, updated.GetGeneralSetting().GetWeeklyMemoSummaryEmails())
+}
+
 func TestUserTagSettings(t *testing.T) {
 	ctx := context.Background()
 	ts := NewTestService(t)

@@ -381,6 +381,10 @@
       "memo-defaults-title": "الإعدادات الافتراضية للمذكرات",
       "save-media-metadata": "حفظ بيانات الوسائط الوصفية",
       "save-media-metadata-description": "لحفظ بيانات الكاميرا المتاحة، ووقت الالتقاط، والموقع، وأبعاد الصورة، وتفاصيل الفيديو الأساسية، وذلك لتسهيل عمليات التحميل المستقبلية. يمكن لأي شخص لديه إمكانية عرض المرفق استلام هذه البيانات الوصفية. تبقى المرفقات الموجودة دون تغيير.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "theme-description": "يُطبّق المظهر المُختار فورًا على هذا الجهاز.",
       "uploads-privacy-description": "التحكم في المعلومات الحساسة المتعلقة بالخصوصية المُرسلة مع الوسائط المُحمّلة.",
       "uploads-privacy-title": "التحميلات والخصوصية"

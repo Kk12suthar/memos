@@ -472,6 +472,10 @@
       "theme-description": "Past het geselecteerde thema onmiddellijk toe op dit apparaat.",
       "save-media-metadata": "Mediametadata opslaan",
       "save-media-metadata-description": "Voor toekomstige uploads, sla beschikbare camera, opnametijd, locatie, afmetingen van de afbeelding en basisvideogegevens op. Iedereen die de bijlage kan bekijken, kan deze metadata ontvangen. Bestaande bijlagen blijven ongewijzigd.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Beheer privacygevoelige informatie die met geüploade media wordt verzonden.",
       "uploads-privacy-title": "Uploads en privacy"
     },

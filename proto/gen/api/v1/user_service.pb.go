@@ -4141,8 +4141,10 @@ type UserSetting_GeneralSetting struct {
 	Theme string `protobuf:"bytes,4,opt,name=theme,proto3" json:"theme,omitempty"`
 	// Whether the official client should save metadata from future media uploads.
 	SaveMediaMetadata bool `protobuf:"varint,5,opt,name=save_media_metadata,json=saveMediaMetadata,proto3" json:"save_media_metadata,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Whether the user should receive a weekly memo summary email.
+	WeeklyMemoSummaryEmails *bool `protobuf:"varint,6,opt,name=weekly_memo_summary_emails,json=weeklyMemoSummaryEmails,proto3,oneof" json:"weekly_memo_summary_emails,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *UserSetting_GeneralSetting) Reset() {
@@ -4199,6 +4201,13 @@ func (x *UserSetting_GeneralSetting) GetTheme() string {
 func (x *UserSetting_GeneralSetting) GetSaveMediaMetadata() bool {
 	if x != nil {
 		return x.SaveMediaMetadata
+	}
+	return false
+}
+
+func (x *UserSetting_GeneralSetting) GetWeeklyMemoSummaryEmails() bool {
+	if x != nil && x.WeeklyMemoSummaryEmails != nil {
+		return *x.WeeklyMemoSummaryEmails
 	}
 	return false
 }
@@ -4799,17 +4808,19 @@ const file_api_v1_user_service_proto_rawDesc = "" +
 	"\x06filter\x18\x02 \x01(\tB\x03\xe0A\x01R\x06filterJ\x04\b\x03\x10\x04J\x04\b\x04\x10\x05R\x05spaceR\n" +
 	"unassigned\"I\n" +
 	"\x18ListAllUserStatsResponse\x12-\n" +
-	"\x05stats\x18\x01 \x03(\v2\x17.memos.api.v1.UserStatsR\x05stats\"\xf1\a\n" +
+	"\x05stats\x18\x01 \x03(\v2\x17.memos.api.v1.UserStatsR\x05stats\"\xd7\b\n" +
 	"\vUserSetting\x12\x17\n" +
 	"\x04name\x18\x01 \x01(\tB\x03\xe0A\bR\x04name\x12S\n" +
 	"\x0fgeneral_setting\x18\x02 \x01(\v2(.memos.api.v1.UserSetting.GeneralSettingH\x00R\x0egeneralSetting\x12V\n" +
 	"\x10webhooks_setting\x18\x05 \x01(\v2).memos.api.v1.UserSetting.WebhooksSettingH\x00R\x0fwebhooksSetting\x12J\n" +
-	"\ftags_setting\x18\x06 \x01(\v2%.memos.api.v1.UserSetting.TagsSettingH\x00R\vtagsSetting\x1a\xab\x01\n" +
+	"\ftags_setting\x18\x06 \x01(\v2%.memos.api.v1.UserSetting.TagsSettingH\x00R\vtagsSetting\x1a\x91\x02\n" +
 	"\x0eGeneralSetting\x12\x1b\n" +
 	"\x06locale\x18\x01 \x01(\tB\x03\xe0A\x01R\x06locale\x12,\n" +
 	"\x0fmemo_visibility\x18\x03 \x01(\tB\x03\xe0A\x01R\x0ememoVisibility\x12\x19\n" +
 	"\x05theme\x18\x04 \x01(\tB\x03\xe0A\x01R\x05theme\x123\n" +
-	"\x13save_media_metadata\x18\x05 \x01(\bB\x03\xe0A\x01R\x11saveMediaMetadata\x1ay\n" +
+	"\x13save_media_metadata\x18\x05 \x01(\bB\x03\xe0A\x01R\x11saveMediaMetadata\x12E\n" +
+	"\x1aweekly_memo_summary_emails\x18\x06 \x01(\bB\x03\xe0A\x01H\x00R\x17weeklyMemoSummaryEmails\x88\x01\x01B\x1d\n" +
+	"\x1b_weekly_memo_summary_emails\x1ay\n" +
 	"\vTagMetadata\x12B\n" +
 	"\x10background_color\x18\x01 \x01(\v2\x12.google.type.ColorB\x03\xe0A\x01R\x0fbackgroundColor\x12&\n" +
 	"\fblur_content\x18\x02 \x01(\bB\x03\xe0A\x01R\vblurContent\x1a\xb7\x01\n" +
@@ -5321,6 +5332,7 @@ func file_api_v1_user_service_proto_init() {
 		(*UserNotification_MemoMention)(nil),
 		(*UserNotification_SpaceInvitation)(nil),
 	}
+	file_api_v1_user_service_proto_msgTypes[59].OneofWrappers = []any{}
 	file_api_v1_user_service_proto_msgTypes[64].OneofWrappers = []any{
 		(*MemoView_Icon_Emoji)(nil),
 		(*MemoView_Icon_Lucide)(nil),

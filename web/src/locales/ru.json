@@ -472,6 +472,10 @@
       "theme-description": "Немедленно применяет выбранную тему на этом устройстве.",
       "save-media-metadata": "Сохранять метаданные медиафайлов",
       "save-media-metadata-description": "Для будущих загрузок сохранять доступные сведения о камере, времени и месте съёмки, размерах изображения и основные сведения о видео. Эти метаданные доступны всем, кто может просматривать вложение. Существующие вложения не изменяются.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Управляйте конфиденциальными сведениями, отправляемыми вместе с загружаемыми медиафайлами.",
       "uploads-privacy-title": "Загрузки и конфиденциальность"
     },

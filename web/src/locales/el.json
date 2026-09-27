@@ -588,6 +588,10 @@
       "theme": "Θέμα",
       "save-media-metadata": "Αποθήκευση μεταδεδομένων πολυμέσων",
       "save-media-metadata-description": "Για μελλοντικές μεταφορτώσεις, αποθηκεύστε τη διαθέσιμη κάμερα, την ώρα λήψης, την τοποθεσία, τις διαστάσεις της εικόνας και τις βασικές λεπτομέρειες του βίντεο. Όποιος μπορεί να δει το συνημμένο μπορεί να λάβει αυτά τα μεταδεδομένα. Τα υπάρχοντα συνημμένα παραμένουν αμετάβλητα.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Έλεγχος πληροφοριών που είναι ευαίσθητες στην προστασία της ιδιωτικής ζωής και υποβάλλονται με τα μεταφορτωμένα μέσα.",
       "uploads-privacy-title": "Μεταφορτώσεις & απόρρητο"
     },

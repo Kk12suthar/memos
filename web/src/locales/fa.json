@@ -381,6 +381,10 @@
       "memo-defaults-title": "پیش‌فرض‌های یادداشت",
       "save-media-metadata": "ذخیره فراداده رسانه",
       "save-media-metadata-description": "برای آپلودهای بعدی، دوربین موجود، زمان ضبط، مکان، ابعاد تصویر و جزئیات اولیه ویدیو را ذخیره می‌کند. هر کسی که بتواند پیوست را مشاهده کند، می‌تواند این فراداده را دریافت کند. پیوست‌های موجود بدون تغییر هستند.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "theme-description": "تم انتخاب شده را فوراً در این دستگاه اعمال می‌کند.",
       "uploads-privacy-description": "اطلاعات حساس به حریم خصوصی ارسال شده با رسانه آپلود شده را کنترل می‌کند.",
       "uploads-privacy-title": "آپلودها و حریم خصوصی"

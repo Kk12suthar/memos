@@ -472,6 +472,10 @@
       "theme-description": "Okamžitě použije vybraný motiv na tomto zařízení.",
       "save-media-metadata": "Uložit metadata médií",
       "save-media-metadata-description": "Pro budoucí nahrávání uložit dostupnou kameru, čas pořízení, místo, rozměry obrázku a základní podrobnosti o videu. Tato metadata může obdržet kdokoli, kdo si může přílohu prohlédnout. Stávající přílohy zůstávají nezměněny.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Ovládejte informace citlivé na ochranu soukromí odesílané s nahranými médii.",
       "uploads-privacy-title": "Nahrávání a soukromí"
     },

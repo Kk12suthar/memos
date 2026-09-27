@@ -472,6 +472,10 @@
       "theme-description": "選択したテーマをこのデバイスにすぐに適用します。",
       "save-media-metadata": "メディアメタデータの保存",
       "save-media-metadata-description": "今後のアップロードのために、使用可能なカメラ、撮影時間、場所、画像サイズ、および基本的なビデオの詳細を保存します。添付ファイルを閲覧できるユーザーは誰でもこのメタデータを受け取ることができます。既存の添付ファイルは変更されません。",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "アップロードされたメディアとともに送信されるプライバシーに配慮した情報を管理します。",
       "uploads-privacy-title": "アップロードとプライバシー"
     },

@@ -588,6 +588,10 @@
       "theme": "Тема",
       "save-media-metadata": "Сачувајте метаподатке медија",
       "save-media-metadata-description": "За будућа отпремања, сачувајте доступну камеру, време снимања, локацију, димензије слике и основне детаље видеа. Свако ко може да види прилог може да прими ове метаподатке. Постојећи прилози се не мењају.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Контролишите информације које су осетљиве на приватност и које се достављају уз отпремљене медије.",
       "uploads-privacy-title": "Отпремања и приватност"
     },

@@ -47,6 +47,8 @@ message GeneralUserSetting {
   string theme = 3;
   // Whether the official client should save metadata from future media uploads.
   bool save_media_metadata = 4;
+  // Whether the user should receive a weekly memo summary email.
+  optional bool weekly_memo_summary_emails = 5;
 }
 
 message UserTagMetadata {

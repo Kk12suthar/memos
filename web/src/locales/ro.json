@@ -588,6 +588,10 @@
       "theme": "Temă",
       "save-media-metadata": "Salvați metadatele media",
       "save-media-metadata-description": "Pentru încărcările viitoare, salvați camera disponibilă, ora capturii, locația, dimensiunile imaginii și detaliile de bază ale videoclipului. Oricine poate vizualiza atașamentul poate primi aceste metadate. Atașamentele existente rămân neschimbate.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Controlați informațiile sensibile la confidențialitate trimise odată cu media încărcată.",
       "uploads-privacy-title": "Încărcări și confidențialitate"
     },

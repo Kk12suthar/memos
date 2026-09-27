@@ -472,6 +472,10 @@
       "theme-description": "Bruker det valgte temaet umiddelbart på denne enheten.",
       "save-media-metadata": "Lagre mediemetadata",
       "save-media-metadata-description": "Lagre tilgjengelig kamera, opptakstidspunkt, sted, bildedimensjoner og grunnleggende videodetaljer for fremtidige opplastinger. Alle som kan se vedlegget kan motta disse metadataene. Eksisterende vedlegg endres ikke.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Kontroller personvernsensitiv informasjon som sendes inn med opplastede medier.",
       "uploads-privacy-title": "Opplastinger og personvern"
     },

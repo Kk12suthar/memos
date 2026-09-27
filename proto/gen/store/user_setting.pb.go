@@ -263,8 +263,10 @@ type GeneralUserSetting struct {
 	Theme string `protobuf:"bytes,3,opt,name=theme,proto3" json:"theme,omitempty"`
 	// Whether the official client should save metadata from future media uploads.
 	SaveMediaMetadata bool `protobuf:"varint,4,opt,name=save_media_metadata,json=saveMediaMetadata,proto3" json:"save_media_metadata,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	// Whether the user should receive a weekly memo summary email.
+	WeeklyMemoSummaryEmails *bool `protobuf:"varint,5,opt,name=weekly_memo_summary_emails,json=weeklyMemoSummaryEmails,proto3,oneof" json:"weekly_memo_summary_emails,omitempty"`
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *GeneralUserSetting) Reset() {
@@ -321,6 +323,13 @@ func (x *GeneralUserSetting) GetTheme() string {
 func (x *GeneralUserSetting) GetSaveMediaMetadata() bool {
 	if x != nil {
 		return x.SaveMediaMetadata
+	}
+	return false
+}
+
+func (x *GeneralUserSetting) GetWeeklyMemoSummaryEmails() bool {
+	if x != nil && x.WeeklyMemoSummaryEmails != nil {
+		return *x.WeeklyMemoSummaryEmails
 	}
 	return false
 }
@@ -1105,12 +1114,14 @@ const file_store_user_setting_proto_rawDesc = "" +
 	"\x0eREFRESH_TOKENS\x10\x06\x12\x1a\n" +
 	"\x16PERSONAL_ACCESS_TOKENS\x10\a\x12\b\n" +
 	"\x04TAGS\x10\bB\a\n" +
-	"\x05value\"\x9b\x01\n" +
+	"\x05value\"\xfc\x01\n" +
 	"\x12GeneralUserSetting\x12\x16\n" +
 	"\x06locale\x18\x01 \x01(\tR\x06locale\x12'\n" +
 	"\x0fmemo_visibility\x18\x02 \x01(\tR\x0ememoVisibility\x12\x14\n" +
 	"\x05theme\x18\x03 \x01(\tR\x05theme\x12.\n" +
-	"\x13save_media_metadata\x18\x04 \x01(\bR\x11saveMediaMetadata\"s\n" +
+	"\x13save_media_metadata\x18\x04 \x01(\bR\x11saveMediaMetadata\x12@\n" +
+	"\x1aweekly_memo_summary_emails\x18\x05 \x01(\bH\x00R\x17weeklyMemoSummaryEmails\x88\x01\x01B\x1d\n" +
+	"\x1b_weekly_memo_summary_emails\"s\n" +
 	"\x0fUserTagMetadata\x12=\n" +
 	"\x10background_color\x18\x01 \x01(\v2\x12.google.type.ColorR\x0fbackgroundColor\x12!\n" +
 	"\fblur_content\x18\x02 \x01(\bR\vblurContent\"\xa4\x01\n" +
@@ -1250,6 +1261,7 @@ func file_store_user_setting_proto_init() {
 		(*UserSetting_PersonalAccessTokens)(nil),
 		(*UserSetting_Tags)(nil),
 	}
+	file_store_user_setting_proto_msgTypes[1].OneofWrappers = []any{}
 	file_store_user_setting_proto_msgTypes[13].OneofWrappers = []any{
 		(*MemoViewsUserSetting_MemoView_Icon_Emoji)(nil),
 		(*MemoViewsUserSetting_MemoView_Icon_Lucide)(nil),

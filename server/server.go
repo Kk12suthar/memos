@@ -14,8 +14,10 @@ import (
 	"github.com/labstack/echo/v5/middleware"
 	"github.com/pkg/errors"
 
+	"github.com/usememos/memos/core/digest"
 	"github.com/usememos/memos/internal/clientip"
 	"github.com/usememos/memos/internal/profile"
+	"github.com/usememos/memos/markdown"
 	storepb "github.com/usememos/memos/proto/gen/store"
 	apiv1 "github.com/usememos/memos/server/api/v1"
 	"github.com/usememos/memos/server/fileserver"
@@ -41,14 +43,15 @@ type Server struct {
 	Profile *profile.Profile
 	Store   *store.Store
 
-	echoServer   *echo.Echo
-	httpServer   *http.Server
-	apiV1Service *apiv1.APIV1Service
+	echoServer         *echo.Echo
+	httpServer         *http.Server
+	apiV1Service       *apiv1.APIV1Service
+	weeklyDigestRunner *WeeklyDigestRunner
 }
 
-func NewServer(ctx context.Context, profile *profile.Profile, store *store.Store) (*Server, error) {
+func NewServer(ctx context.Context, profile *profile.Profile, storeInstance *store.Store) (*Server, error) {
 	s := &Server{
-		Store:   store,
+		Store:   storeInstance,
 		Profile: profile,
 	}
 
@@ -81,9 +84,9 @@ func NewServer(ctx context.Context, profile *profile.Profile, store *store.Store
 	})
 
 	// Serve frontend static files.
-	frontend.NewFrontendService(profile, store).Serve(ctx, echoServer)
+	frontend.NewFrontendService(profile, storeInstance).Serve(ctx, echoServer)
 
-	apiV1Service := apiv1.NewAPIV1Service(s.Secret, profile, store)
+	apiV1Service := apiv1.NewAPIV1Service(s.Secret, profile, storeInstance)
 	s.apiV1Service = apiV1Service
 
 	// Register HTTP file server routes BEFORE gRPC-Gateway to ensure proper range request handling for Safari.
@@ -101,6 +104,23 @@ func NewServer(ctx context.Context, profile *profile.Profile, store *store.Store
 		return nil, errors.Wrap(err, "failed to create MCP service")
 	}
 	mcpService.RegisterRoutes(echoServer)
+	if profile.WeeklyDigest {
+		digestBuilder := digest.NewBuilder(storeInstance, markdown.NewService(), profile.InstanceURL)
+		s.weeklyDigestRunner = NewWeeklyDigestRunner(storeInstance, WeeklyDigestRunnerOptions{
+			OptIn: WeeklyDigestOptInFromStore(storeInstance),
+			Deliver: func(deliveryCtx context.Context, user *store.User, period WeeklyDigestPeriod) (bool, error) {
+				window, err := digest.NewWindow(period.Start, period.End)
+				if err != nil {
+					return false, errors.Wrap(err, "invalid weekly digest period")
+				}
+				setting, err := storeInstance.GetInstanceNotificationSetting(deliveryCtx)
+				if err != nil {
+					return false, errors.Wrap(err, "failed to get weekly digest notification setting")
+				}
+				return digestBuilder.Send(deliveryCtx, user, window, setting.GetEmail())
+			},
+		})
+	}
 
 	return s, nil
 }
@@ -137,6 +157,9 @@ func (s *Server) Start() error {
 			slog.Error("failed to start echo server", "error", err)
 		}
 	}()
+	if s.weeklyDigestRunner != nil {
+		s.weeklyDigestRunner.Start()
+	}
 
 	return nil
 }
@@ -148,6 +171,17 @@ func (s *Server) Shutdown(ctx context.Context) {
 	slog.Info("server shutting down")
 
 	s.closeLongLivedConnections()
+	if s.weeklyDigestRunner != nil {
+		if err := s.weeklyDigestRunner.Stop(ctx); err != nil {
+			slog.Error("failed to stop weekly digest runner", slog.String("error", err.Error()))
+			// The store must not close while a delivery callback can still be
+			// using it. The runner has already cancelled its run context; wait
+			// without the HTTP shutdown deadline before closing the store.
+			if waitErr := s.weeklyDigestRunner.Stop(context.Background()); waitErr != nil {
+				slog.Error("failed to wait for weekly digest runner", slog.String("error", waitErr.Error()))
+			}
+		}
+	}
 	s.shutdownHTTPServer(ctx)
 	s.apiV1Service.CloseUploads()
 
@@ -157,6 +191,17 @@ func (s *Server) Shutdown(ctx context.Context) {
 	}
 
 	slog.Info("memos stopped properly")
+}
+
+// ConfigureWeeklyDigest wires the core digest renderer and the generated
+// user-setting opt-in check into the server-owned runner. It must be called
+// after NewServer and before Start when --weekly-digest is enabled.
+func (s *Server) ConfigureWeeklyDigest(optIn WeeklyDigestOptIn, deliver WeeklyDigestDelivery) error {
+	if s.weeklyDigestRunner == nil {
+		return errors.New("weekly digest is disabled")
+	}
+	s.weeklyDigestRunner.SetDelivery(optIn, deliver)
+	return nil
 }
 
 func (s *Server) closeLongLivedConnections() {

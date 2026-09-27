@@ -472,6 +472,10 @@
       "theme-description": "Odmah primjenjuje odabranu temu na ovom uređaju.",
       "save-media-metadata": "Spremite metapodatke medija",
       "save-media-metadata-description": "Za buduće prijenose spremite dostupnu kameru, vrijeme snimanja, lokaciju, dimenzije slike i osnovne detalje videa. Svatko tko može pregledati privitak može primiti ove metapodatke. Postojeći privitci ostaju nepromijenjeni.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Kontrolirajte podatke osjetljive na privatnost koji se šalju s prenesenim medijima.",
       "uploads-privacy-title": "Prijenosi i privatnost"
     },

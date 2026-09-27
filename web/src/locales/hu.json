@@ -472,6 +472,10 @@
       "theme-description": "Azonnal alkalmazza a kiválasztott témát ezen az eszközön.",
       "save-media-metadata": "Média metaadatok mentése",
       "save-media-metadata-description": "A jövőbeli feltöltésekhez mentse el az elérhető kamerát, a felvétel idejét, a helyszínt, a kép méreteit és az alapvető videóadatokat. Bárki, aki megtekintheti a mellékletet, megkaphatja ezeket a metaadatokat. A meglévő mellékletek változatlanok maradnak.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "A feltöltött médiával beküldött adatvédelmi szempontból érzékeny információk kezelése.",
       "uploads-privacy-title": "Feltöltések és adatvédelem"
     },

@@ -472,6 +472,10 @@
       "theme-description": "Aplica o tema seleccionado inmediatamente neste dispositivo.",
       "save-media-metadata": "Gardar metadatos multimedia",
       "save-media-metadata-description": "Para futuras cargas, garda a cámara dispoñible, a hora de captura, a localización, as dimensións da imaxe e os detalles básicos do vídeo. Calquera persoa que poida ver o anexo pode recibir estes metadatos. Os anexos existentes non cambian.",
+      "weekly-summary-title": "Weekly memo summaries",
+      "weekly-summary-description": "Choose whether to receive a weekly email with a summary of your memos.",
+      "weekly-summary-emails": "Receive weekly memo summary emails",
+      "weekly-summary-emails-description": "Receive a weekly email with a summary of your memos.",
       "uploads-privacy-description": "Controla a información confidencial sobre a privacidade enviada cos medios cargados.",
       "uploads-privacy-title": "Cargas e privacidade"
     },

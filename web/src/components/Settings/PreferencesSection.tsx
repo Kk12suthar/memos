@@ -75,6 +75,17 @@ const PreferencesSection = () => {
     );
   };
 
+  const handleWeeklyMemoSummaryEmailsChange = (weeklyMemoSummaryEmails: boolean) => {
+    updateUserGeneralSetting(
+      { generalSetting: { weeklyMemoSummaryEmails }, updateMask: ["weekly_memo_summary_emails"] },
+      {
+        onSuccess: async () => {
+          await refetchSettings();
+        },
+      },
+    );
+  };
+
   // Provide default values if setting is not loaded yet
   const setting: UserSetting_GeneralSetting =
     generalSetting ||
@@ -83,6 +94,7 @@ const PreferencesSection = () => {
       memoVisibility: "PRIVATE",
       theme: "system",
       saveMediaMetadata: false,
+      weeklyMemoSummaryEmails: false,
     });
 
   return (
@@ -147,6 +159,26 @@ const PreferencesSection = () => {
               checked={setting.saveMediaMetadata}
               disabled={isUpdatingGeneralSetting}
               onCheckedChange={handleSaveMediaMetadataChange}
+            />
+          </SettingListItem>
+        </SettingList>
+      </SettingGroup>
+
+      <SettingGroup
+        title={t("setting.preference.weekly-summary-title")}
+        description={t("setting.preference.weekly-summary-description")}
+        showSeparator
+      >
+        <SettingList>
+          <SettingListItem
+            label={t("setting.preference.weekly-summary-emails")}
+            description={t("setting.preference.weekly-summary-emails-description")}
+          >
+            <Switch
+              aria-label={t("setting.preference.weekly-summary-emails")}
+              checked={setting.weeklyMemoSummaryEmails ?? false}
+              disabled={isUpdatingGeneralSetting}
+              onCheckedChange={handleWeeklyMemoSummaryEmailsChange}
             />
           </SettingListItem>
         </SettingList>
